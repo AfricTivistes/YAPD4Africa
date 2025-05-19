@@ -1,0 +1,86 @@
+import type React from "react"
+import { Users, Megaphone, ClipboardCheck, Award, Handshake, Globe } from "lucide-react"
+
+// Approach card component
+function ApproachCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: React.ElementType
+  title: string
+  description: string
+}) {
+  return (
+    <div className="group rounded-lg border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-[#008000] hover:shadow-md">
+      <div className="mb-4 inline-flex rounded-full bg-[#e6f2e6] p-3 text-[#008000] transition-all duration-300 group-hover:bg-[#008000] group-hover:text-white">
+        <Icon className="h-6 w-6" />
+      </div>
+      <h3 className="mb-2 text-xl font-bold text-gray-900">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  )
+}
+
+export default function ApproachSection() {
+  const approaches = [
+    {
+      icon: Users,
+      title: "Community Engagement",
+      description:
+        "Centering community voices and needs in all our work, ensuring local ownership and participation in development initiatives.",
+    },
+    {
+      icon: Megaphone,
+      title: "Advocacy",
+      description:
+        "Amplifying marginalized voices and advocating for policy changes that promote equity, justice, and sustainable development.",
+    },
+    {
+      icon: ClipboardCheck,
+      title: "Research",
+      description:
+        "Conducting rigorous research to inform evidence-based interventions and measure impact across our programs.",
+    },
+    {
+      icon: Award,
+      title: "Empowerment",
+      description:
+        "Building capacity and creating opportunities for individuals and communities to lead their own development journey.",
+    },
+    {
+      icon: Handshake,
+      title: "Strategic Partnerships",
+      description:
+        "Collaborating with diverse stakeholders to leverage resources and expertise for greater collective impact.",
+    },
+    {
+      icon: Globe,
+      title: "Digital Campaigns",
+      description:
+        "Utilizing digital platforms to raise awareness, mobilize support, and drive social change at scale.",
+    },
+  ]
+
+  return (
+    <section className="bg-gray-50 py-16 md:py-24">
+      <div className="container mx-auto px-4">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Our Approach: CARE-SD</h2>
+          <div className="mx-auto h-1 w-20 bg-[#008000] mb-6"></div>
+          <p className="mx-auto max-w-3xl text-lg text-gray-700">
+            Our comprehensive CARE-SD framework guides our work in community development, ensuring sustainable impact
+            through six interconnected pillars. This holistic approach addresses the complex challenges facing African
+            communities.
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {approaches.map((approach, index) => (
+            <ApproachCard key={index} icon={approach.icon} title={approach.title} description={approach.description} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

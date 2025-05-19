@@ -1,0 +1,117 @@
+"use client"
+
+import type React from "react"
+
+import { useEffect, useState, useRef } from "react"
+import { Users, Home, DollarSign, Globe } from "lucide-react"
+import { useInView } from "react-intersection-observer"
+
+// Counter animation function
+function useCounterAnimation(end: number, duration = 2000, startOnView = true) {
+  const [count, setCount] = useState(0)
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+  const startedRef = useRef(false)
+
+  useEffect(() => {
+    if (inView && !startedRef.current && startOnView) {
+      startedRef.current = true
+      let start = 0
+      const step = Math.max(1, Math.floor(end / (duration / 16)))
+
+      const timer = setInterval(() => {
+        start += step
+        if (start > end) {
+          setCount(end)
+          clearInterval(timer)
+        } else {
+          setCount(start)
+        }
+      }, 16)
+
+      return () => clearInterval(timer)
+    }
+  }, [inView, end, duration, startOnView])
+
+  return { count, ref }
+}
+
+// Stat box component
+function StatBox({
+  icon: Icon,
+  count,
+  suffix,
+  description,
+}: {
+  icon: React.ElementType
+  count: number
+  suffix: string
+  description: string
+}) {
+  return (
+    <div className="flex flex-col items-center p-6 text-center transition-all hover:shadow-md">
+      <div className="mb-4 rounded-full bg-[#e6f2e6] p-4">
+        <Icon className="h-8 w-8 text-[#008000]" />
+      </div>
+      <div className="mb-2 flex items-baseline">
+        <span className="text-4xl font-bold text-[#008000] md:text-5xl">{count.toLocaleString()}</span>
+        <span className="text-2xl font-bold text-[#008000] md:text-3xl">{suffix}</span>
+      </div>
+      <p className="text-gray-700">{description}</p>
+    </div>
+  )
+}
+
+export default function ImpactSection() {
+  const { count: livesCount, ref: livesRef } = useCounterAnimation(30000)
+  const { count: communitiesCount, ref: communitiesRef } = useCounterAnimation(80)
+  const { count: fundsCount, ref: fundsRef } = useCounterAnimation(25000)
+  const { count: reachCount, ref: reachRef } = useCounterAnimation(60000)
+
+  return (
+    <section className="bg-[#f0f7f0] py-16 md:py-24">
+      <div className="container mx-auto px-4">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Our Impact</h2>
+          <div className="mx-auto h-1 w-20 bg-[#008000]"></div>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-700">
+            Transforming lives and communities across Africa through sustainable development initiatives.
+          </p>
+        </div>
+
+        <div ref={livesRef} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <StatBox
+            icon={Users}
+            count={livesCount}
+            suffix="+"
+            description="Lives reached through our programs and initiatives"
+          />
+
+          <div ref={communitiesRef}>
+            <StatBox
+              icon={Home}
+              count={communitiesCount}
+              suffix="+"
+              description="Communities supported across multiple regions"
+            />
+          </div>
+
+          <div ref={fundsRef}>
+            <StatBox
+              icon={DollarSign}
+              count={fundsCount}
+              suffix="+"
+              description="Funds raised to support community development"
+            />
+          </div>
+
+          <div ref={reachRef}>
+            <StatBox icon={Globe} count={reachCount} suffix="+" description="Global media reach spreading awareness" />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
