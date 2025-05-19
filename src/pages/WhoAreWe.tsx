@@ -9,37 +9,37 @@ const WhoAreWe = () => {
     {
       name: "Idris Bilyaminu Ndasadu'Lau",
       role: "Chief Executive",
-      //bio: "Leading YAPD4Africa's vision and strategic direction with extensive experience in youth development and community engagement.",
+      bio: "Leading YAPD4Africa's vision and strategic direction with extensive experience in youth development and community engagement.",
       image: "/lovable-uploads/Staff/Idris.JPG"
     },
     {
       name: "Sa'adatu Idris Ndasadu'Lau",
       role: "Head of Programs",
-      //bio: "Overseeing program development and implementation with a focus on sustainable community impact.",
+      bio: "Overseeing program development and implementation with a focus on sustainable community impact.",
       image: "/lovable-uploads/Staff/saadatu.png"
     },
     {
       name: "Yahya Abubakar",
       role: "Programs Manager (Youth Engagement)",
-      //bio: "Specializing in youth mobilization and leadership development across African communities.",
+      bio: "Specializing in youth mobilization and leadership development across African communities.",
       image: "/lovable-uploads/Staff/Yahaya.JPG"
     },
     {
       name: "Fatima Muftau",
       role: "Assistant Monitoring and Evaluation Manager",
-      //bio: "Ensuring program effectiveness and impact through rigorous monitoring and evaluation.",
+      bio: "Ensuring program effectiveness and impact through rigorous monitoring and evaluation.",
       image: "/lovable-uploads/Staff/fatima.png"
     },
     {
       name: "Baqau Hassan Omotayo",
       role: "Creative Design Manager",
-      //bio: "Leading our visual communication and creative strategy to amplify our impact.",
+      bio: "Leading our visual communication and creative strategy to amplify our impact.",
       image: "/lovable-uploads/Staff/Hassan.JPG"
     },
     {
       name: "Ibrahim Mohammed Bakodo",
       role: "Community Engagement Manager",
-      //bio: "Leading our visual communication and creative strategy to amplify our impact.",
+      bio: "Building bridges, fostering connections, and empowering communities through inclusive engagement strategies.",
       image: "/lovable-uploads/Staff/Ibrahim Mohammed Badoko.JPG"
     }
   ];
@@ -48,55 +48,55 @@ const WhoAreWe = () => {
     {
       name: "Fatima Mohammed Habib",
       title: "Board Chair",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Fatima.JPG"
     },
     {
       name: "Idris Bilyaminu Ndasadu'Lau",
       title: "Board Secretary",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Staff/Idris.JPG"
     },
     {
       name: "Tagwai Zigwai",
       title: "Board Secretary II",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Zigwai.JPG"
     },
     {
       name: "Aisha Dabo",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Aisha.JPG"
     },
     {
       name: "Abbas Inuwa",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Abbas.JPG"
     },
     {
       name: "Zainab Suleiman Ajuma",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Zainab.JPG"
     },
     {
       name: "Ayomide Ladipo Yetunde",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Ayomide.JPG"
     },
     {
       name: "Mbah Aaron Promise",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Promise.JPG"
     },
     {
       name: "Valentine Okafor",
       title: "Board Member",
-      //organization: "YAPD4Africa",
+      organization: "YAPD4Africa",
       image: "/lovable-uploads/Trustees/Okafor.JPG"
     }
   ];
@@ -248,6 +248,11 @@ Our founders recognized that despite being the continent with the youngest popul
                     {member.name}
                   </h3>
                   <p className="text-emerald-600 font-medium mb-3">{member.role}</p>
+                  {member.bio && (
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {member.bio}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             ))}
