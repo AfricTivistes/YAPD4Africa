@@ -37,7 +37,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center group">
             <img 
-              src="/lovable-uploads/logoyapd.png" 
+              src="/lovable-uploads/logoyapd_transparent.png" 
               alt="YAPD4Africa Logo" 
               className={cn(
                 "transition-all duration-300",
