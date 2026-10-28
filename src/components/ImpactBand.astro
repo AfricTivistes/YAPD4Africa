@@ -1,0 +1,27 @@
+---
+import type { ImpactStat } from "@/lib/types";
+
+interface Props {
+  impact: ImpactStat[];
+}
+
+const { impact } = Astro.props;
+---
+
+<section aria-label="Our impact in numbers" class="relative bg-brand-deep text-white">
+  <ul
+    class="container-site grid grid-cols-2 gap-x-6 gap-y-10 py-12 sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-white/10"
+  >
+    {
+      impact.map((stat, i) => (
+        <li
+          class:list={["lg:px-6 lg:first:pl-0", i === impact.length - 1 && impact.length % 2 === 1 && "col-span-2 sm:col-span-1"]}
+        >
+          <p class="font-display text-4xl font-bold text-accent md:text-5xl">{stat.value}</p>
+          <p class="mt-2 font-semibold text-white">{stat.label}</p>
+          <p class="mt-1 text-sm leading-snug text-white/65">{stat.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>

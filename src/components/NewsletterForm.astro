@@ -1,0 +1,29 @@
+---
+// Newsletter sign-up handled by Netlify Forms (form "newsletter").
+// Subscribers can be exported as CSV from Netlify, or forwarded to Brevo/Mailchimp.
+---
+
+<form
+  name="newsletter"
+  method="POST"
+  action="/newsletter/thank-you"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="flex flex-col gap-3 sm:flex-row"
+>
+  <input type="hidden" name="form-name" value="newsletter" />
+  <p class="hidden">
+    <label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <label for="newsletter-email" class="sr-only">Email address</label>
+  <input
+    id="newsletter-email"
+    name="email"
+    type="email"
+    required
+    autocomplete="email"
+    placeholder="Your email address"
+    class="min-w-0 flex-1 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-white placeholder:text-white/70 focus:border-white focus:outline-none"
+  />
+  <button type="submit" class="btn-light shrink-0">Subscribe</button>
+</form>

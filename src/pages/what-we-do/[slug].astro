@@ -1,0 +1,163 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Img from "@/components/Img.astro";
+import ReportCard from "@/components/ReportCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import Icon from "@/components/Icon.astro";
+import { getProjects, getReports } from "@/lib/content";
+import type { Project, Report } from "@/lib/types";
+
+export const getStaticPaths = (async () => {
+  const [projects, reports] = await Promise.all([getProjects(), getReports()]);
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      related: projects.filter((p) => p.slug !== project.slug && p.category === project.category).slice(0, 2),
+      reports: reports.filter((r) => r.project === project.slug),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: Project;
+  related: Project[];
+  reports: Report[];
+}
+
+const { project, related, reports } = Astro.props;
+const site = Astro.site!;
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: new URL("/", site).href },
+    { "@type": "ListItem", position: 2, name: "What We Do", item: new URL("/what-we-do", site).href },
+    { "@type": "ListItem", position: 3, name: project.title },
+  ],
+};
+---
+
+<BaseLayout title={project.title} description={project.summary} image={project.image.src} jsonLd={[breadcrumb]}>
+  <PageHero
+    eyebrow={[project.category === "homegrown" ? "Our programs" : "Completed project", project.period].filter(Boolean).join(" · ")}
+    title={project.title}
+    intro={project.summary}
+    image={project.image}
+  >
+    <nav slot="before" aria-label="Breadcrumb" class="mb-6 text-sm text-white/80">
+      <a href="/" class="inline-block py-1 hover:text-white">Home</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/what-we-do" class="inline-block py-1 hover:text-white">What We Do</a>
+    </nav>
+  </PageHero>
+
+  {
+    project.stats && project.stats.length > 0 && (
+      <section aria-label="Key figures" class="border-b border-gray-200/80 bg-sand">
+        <dl
+          class:list={[
+            "container-site grid gap-6 py-10 sm:grid-cols-2",
+            project.stats.length >= 4 ? "lg:grid-cols-4" : project.stats.length === 3 ? "lg:grid-cols-3" : "",
+          ]}
+        >
+          {project.stats.map((stat) => (
+            <div class="flex flex-col-reverse justify-end" data-reveal>
+              <dt class="mt-1 text-gray-600">{stat.label}</dt>
+              <dd class="font-display text-4xl font-bold text-brand">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )
+  }
+
+  <section class="section bg-white">
+    <div class="container-site grid gap-12 lg:grid-cols-[1.8fr_1fr] lg:gap-16">
+      <article
+        class="prose prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-brand prose-li:marker:text-brand"
+        set:html={project.content}
+      />
+      <aside aria-label="Project details" class="space-y-6 lg:sticky lg:top-28 lg:self-start">
+        <div class="overflow-hidden rounded-2xl">
+          <Img media={project.image} class="aspect-[4/3] w-full object-cover" widths={[400, 800]} sizes="(min-width: 1024px) 33vw, 100vw" />
+        </div>
+        {
+          project.impact && (
+            <div class="rounded-2xl bg-brand-deep p-6 text-white">
+              <p class="eyebrow mb-2 text-accent">Impact</p>
+              <p class="leading-relaxed text-white/90">{project.impact}</p>
+            </div>
+          )
+        }
+        {
+          project.supporters && project.supporters.length > 0 && (
+            <div class="card p-6">
+              <h2 class="mb-3 text-base">Supported by</h2>
+              <ul class="space-y-2 text-gray-700">
+                {project.supporters.map((name) => (
+                  <li class="flex items-start gap-2">
+                    <Icon name="lucide:check" class="mt-1 h-4 w-4 shrink-0 text-brand" />
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+        {
+          project.tags.length > 0 && (
+            <ul class="flex flex-wrap gap-2" aria-label="Topics">
+              {project.tags.map((tag) => (
+                <li class="rounded-full bg-sand px-4 py-1.5 text-sm font-medium text-gray-700">{tag}</li>
+              ))}
+            </ul>
+          )
+        }
+        <a href="/support-us" class="btn-accent w-full">
+          <Icon name="lucide:heart" class="h-4 w-4" /> Support this work
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  {
+    reports.length > 0 && (
+      <section class="section bg-sand">
+        <div class="container-site">
+          <SectionHeading eyebrow="Publications" title="Reports and tools from this project" />
+          <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {reports.map((report) => (
+              <ReportCard report={report} />
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    related.length > 0 && (
+      <section class="section bg-white">
+        <div class="container-site">
+          <SectionHeading eyebrow="Keep exploring" title="More from our work" />
+          <div class="grid gap-6 md:grid-cols-2">
+            {related.map((p) => (
+              <ProjectCard project={p} sizes="(min-width: 768px) 50vw, 100vw" />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand
+    title="Help us take this further"
+    text="Partner with us, volunteer, or help us bring this initiative to more communities."
+    label="Get involved"
+  />
+</BaseLayout>

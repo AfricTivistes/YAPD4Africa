@@ -1,0 +1,78 @@
+---
+import Img from "./Img.astro";
+import Icon from "./Icon.astro";
+import type { Project } from "@/lib/types";
+
+interface Props {
+  project: Project;
+  /** "overlay": title on the photo (used in the home page bento grid). */
+  variant?: "default" | "overlay";
+  class?: string;
+  sizes?: string;
+}
+
+const { project, variant = "default", class: className, sizes = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" } =
+  Astro.props;
+const href = `/what-we-do/${project.slug}`;
+---
+
+{
+  variant === "overlay" ? (
+    <article class:list={["group relative min-h-72 overflow-hidden rounded-2xl bg-brand-deep", className]} data-reveal>
+      <Img
+        media={project.image}
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        widths={[480, 800, 1200]}
+        sizes={sizes}
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-deep from-15% via-brand-deep/70 to-brand-deep/5" />
+      <div class="relative flex h-full flex-col justify-end p-6 md:p-8">
+        {project.period && (
+          <span class="mb-3 w-fit rounded-full bg-accent px-3 py-1 text-xs font-bold text-brand-deep">{project.period}</span>
+        )}
+        <h3 class="text-xl text-white md:text-2xl">
+          <a href={href} class="after:absolute after:inset-0">
+            {project.title}
+          </a>
+        </h3>
+        <p class="mt-2 line-clamp-2 text-sm text-white/80 md:text-base">{project.summary}</p>
+        <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+          Discover <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </article>
+  ) : (
+    <article
+      class:list={[
+        "card group relative flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+        className,
+      ]}
+      data-reveal
+    >
+      <div class="relative aspect-[16/10] overflow-hidden">
+        <Img
+          media={project.image}
+          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          widths={[400, 700, 1000]}
+          sizes={sizes}
+        />
+        {project.period && (
+          <span class="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-brand-deep shadow-sm">
+            {project.period}
+          </span>
+        )}
+      </div>
+      <div class="flex flex-1 flex-col p-6">
+        <h3 class="mb-2 text-xl group-hover:text-brand">
+          <a href={href} class="after:absolute after:inset-0">
+            {project.title}
+          </a>
+        </h3>
+        <p class="mb-5 leading-relaxed text-gray-600">{project.summary}</p>
+        <span class="mt-auto inline-flex items-center gap-2 font-semibold text-brand">
+          Learn more <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </span>
+      </div>
+    </article>
+  )
+}

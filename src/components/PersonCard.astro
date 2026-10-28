@@ -1,0 +1,28 @@
+---
+import Img from "./Img.astro";
+import type { Person } from "@/lib/types";
+
+interface Props {
+  person: Person;
+  /** Smaller card, two per row on phones. */
+  compact?: boolean;
+}
+
+const { person, compact = false } = Astro.props;
+---
+
+<li class="card group overflow-hidden" data-reveal>
+  <div class="aspect-[4/5] overflow-hidden bg-sand">
+    <Img
+      media={person.image}
+      class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      widths={[320, 640]}
+      sizes={compact ? "(min-width: 1024px) 25vw, 50vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+    />
+  </div>
+  <div class={compact ? "p-3 sm:p-5" : "p-6"}>
+    <h3 class:list={["mb-1", compact ? "text-base sm:text-lg" : "text-xl"]}>{person.name}</h3>
+    <p class:list={["font-medium text-brand", compact && "text-sm"]}>{person.role}</p>
+    {person.bio && <p class="mt-3 text-sm leading-relaxed text-gray-600">{person.bio}</p>}
+  </div>
+</li>

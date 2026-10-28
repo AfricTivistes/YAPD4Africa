@@ -1,0 +1,150 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ImpactBand from "@/components/ImpactBand.astro";
+import Icon from "@/components/Icon.astro";
+import Img from "@/components/Img.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
+import boat from "@/assets/images/home/community-boat.jpg";
+import { getProjects, getSettings } from "@/lib/content";
+
+const [settings, projects] = await Promise.all([getSettings(), getProjects()]);
+const homegrown = projects.filter((p) => p.category === "homegrown");
+const donateHref = settings.donateUrl || `mailto:${settings.email}?subject=${encodeURIComponent("Donation to YAPD4Africa")}`;
+const external = Boolean(settings.donateUrl);
+
+const ways = [
+  {
+    id: "donate",
+    icon: "lucide:hand-heart",
+    title: "Donate",
+    text: "Your donation funds community outreach, civic education sessions and health initiatives in underserved grassroots communities.",
+    cta: external ? "Donate online" : "Contact us to donate",
+    href: donateHref,
+    external,
+  },
+  {
+    id: "volunteer",
+    icon: "lucide:users",
+    title: "Volunteer",
+    text: "Join our network of young volunteers supporting field activities, digital campaigns and research across Nigeria.",
+    cta: "Become a volunteer",
+    href: "/contact?subject=Volunteering",
+    external: false,
+  },
+  {
+    id: "partner",
+    icon: "lucide:handshake",
+    title: "Partner with us",
+    text: "Donors, NGOs and institutions: co-design, fund or scale programs that put grassroots communities first.",
+    cta: "Discuss a partnership",
+    href: "/contact?subject=Partnership",
+    external: false,
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Support Our Work: Donate, Volunteer or Partner"
+  description="Support YAPD4Africa's youth-led work with grassroots communities in Nigeria and Africa: donate, volunteer, or partner with us."
+  image={boat}
+>
+  <PageHero
+    eyebrow="Get involved"
+    title="Support Our Work"
+    intro="Every contribution helps us reach more grassroots communities with civic education, peace-building and health initiatives."
+    image={{ src: boat, alt: "YAPD4Africa team travelling by boat to reach a remote community" }}
+  >
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="#donate" class="btn-light px-8 py-4 text-lg shadow-lg">
+        <Icon name="lucide:heart" class="h-5 w-5" /> Donate
+      </a>
+      <a href="#ways" class="btn-outline-light px-8 py-4 text-lg">Other ways to help</a>
+    </div>
+  </PageHero>
+
+  <ImpactBand impact={settings.impact} />
+
+  <section id="ways" class="section bg-white">
+    <div class="container-site">
+      <SectionHeading title="Ways to help" subtitle="Choose the way that suits you best" centered />
+      <ul class="grid gap-8 md:grid-cols-3">
+        {
+          ways.map((way) => (
+            <li id={way.id} class="flex flex-col rounded-3xl border border-gray-100 bg-gray-50 p-8 shadow-md" data-reveal>
+              <span class="mb-6 inline-flex w-fit rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 p-4 text-white shadow-lg">
+                <Icon name={way.icon} class="h-7 w-7" />
+              </span>
+              <h2 class="mb-3 text-2xl text-gray-900">{way.title}</h2>
+              <p class="mb-8 leading-relaxed text-gray-600">{way.text}</p>
+              <a
+                href={way.href}
+                class="btn-primary mt-auto"
+                {...(way.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {way.cta}
+                <Icon name={way.external ? "lucide:arrow-up-right" : "lucide:arrow-right"} class="h-4 w-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-gray-50">
+    <div class="container-site">
+      <SectionHeading
+        title="Where your support goes"
+        subtitle="Our homegrown initiatives, designed with and for grassroots communities"
+        centered
+      />
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          homegrown.map((project) => (
+            <li class="group relative overflow-hidden rounded-2xl bg-white shadow-md" data-reveal>
+              <Img
+                media={project.image}
+                class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                widths={[320, 640]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              />
+              <div class="p-5">
+                <h3 class="mb-2 text-lg text-gray-900 group-hover:text-emerald-700">
+                  <a href={`/what-we-do/${project.slug}`} class="after:absolute after:inset-0">
+                    {project.title}
+                  </a>
+                </h3>
+                <p class="line-clamp-3 text-sm text-gray-600">{project.summary}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container-site grid gap-8 lg:grid-cols-2">
+      <div class="rounded-3xl border border-emerald-100 bg-emerald-50 p-8" data-reveal>
+        <Icon name="lucide:file-text" class="mb-4 h-8 w-8 text-brand" />
+        <h2 class="mb-3 text-2xl text-gray-900">Transparency & accountability</h2>
+        <p class="mb-6 text-gray-700">
+          Transparency is one of our core values. Our impact reports and project reports are publicly available.
+        </p>
+        <a href="/reports" class="inline-flex items-center gap-2 py-1 font-semibold text-brand hover:text-brand-dark">
+          Read our reports <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+      <div class="rounded-3xl border border-gray-100 bg-gray-50 p-8" data-reveal>
+        <Icon name="lucide:megaphone" class="mb-4 h-8 w-8 text-brand" />
+        <h2 class="mb-3 text-2xl text-gray-900">Spread the word</h2>
+        <p class="mb-6 text-gray-700">
+          Follow us and share our stories. Every share helps us reach new volunteers, partners and supporters.
+        </p>
+        <SocialLinks socials={settings.socials} linkClass="bg-white text-gray-700 shadow-sm hover:bg-brand hover:text-white" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

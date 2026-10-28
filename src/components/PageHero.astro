@@ -1,0 +1,44 @@
+---
+import Img from "./Img.astro";
+import type { Media } from "@/lib/types";
+
+interface Props {
+  title: string;
+  intro?: string;
+  eyebrow?: string;
+  image?: Media;
+}
+
+const { title, intro, eyebrow, image } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-deep">
+  {
+    image && (
+      <Img
+        media={image}
+        class="absolute inset-0 h-full w-full object-cover opacity-55"
+        widths={[480, 768, 1080, 1440, 1920]}
+        quality={60}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )
+  }
+  <div class="absolute inset-0 bg-gradient-to-r from-brand-deep via-brand-deep/80 to-brand-deep/20"></div>
+  <div class="container-site relative py-20 md:py-28">
+    <slot name="before" />
+    {
+      eyebrow && (
+        <p class="eyebrow mb-4 text-accent">
+          <span class="h-px w-8 bg-accent" aria-hidden="true" />
+          {eyebrow}
+        </p>
+      )
+    }
+    <h1 class="max-w-3xl text-4xl leading-[1.1] text-white md:text-6xl">{title}</h1>
+    {intro && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">{intro}</p>}
+    <slot />
+  </div>
+</section>

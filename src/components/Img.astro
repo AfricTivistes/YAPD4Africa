@@ -1,0 +1,30 @@
+---
+// Optimized image for both local assets and remote WordPress media.
+import { Image } from "astro:assets";
+import type { Media } from "@/lib/types";
+
+interface Props {
+  media: Media;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
+  quality?: number;
+}
+
+const { media, widths = [400, 800, 1200], sizes = "100vw", ...rest } = Astro.props;
+const { src, alt, width, height } = media;
+// Keep the fallback `src` at the largest size actually used, not the original upload.
+const maxWidth = Math.max(...widths);
+---
+
+{
+  typeof src !== "string" ? (
+    <Image src={src} alt={alt} width={Math.min(src.width, maxWidth)} widths={widths} sizes={sizes} {...rest} />
+  ) : width && height ? (
+    <Image src={src} alt={alt} width={width} height={height} widths={widths} sizes={sizes} {...rest} />
+  ) : (
+    <Image src={src} alt={alt} inferSize widths={widths} sizes={sizes} {...rest} />
+  )
+}
