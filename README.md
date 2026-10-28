@@ -4,7 +4,7 @@ Site de [yapd4africa.org](https://yapd4africa.org), construit avec [Astro](https
 
 - **Front-end** : Astro 7 + Tailwind CSS 4, déployé sur Netlify. Aucun framework JS côté client.
 - **Back-end** : WordPress, lu via l'API REST **au moment du build**. WordPress n'est jamais appelé par les visiteurs.
-- **Repli local** : tant que `WP_URL` n'est pas défini (ou qu'un type de contenu est vide dans WordPress), le site utilise les données de `src/data/`.
+- **Repli local** : si `WP_API_URL` n'est pas défini, si un type de contenu est vide dans WordPress ou si WordPress ne répond pas pendant le build, le site utilise les données de `src/data/`. Un build n'échoue jamais à cause de WordPress : un avertissement `[wordpress]` apparaît dans les logs Netlify.
 
 ## Développement
 
@@ -12,7 +12,7 @@ Prérequis : Node.js ≥ 22.23 (`nvm use` lit `.nvmrc`).
 
 ```sh
 npm install
-cp .env.example .env   # puis renseigner WP_URL, ou le laisser vide
+cp .env.example .env   # puis renseigner WP_API_URL, ou le laisser vide
 npm run dev            # http://localhost:4321
 npm run build          # vérification TypeScript + build dans dist/
 npm run preview
@@ -39,13 +39,33 @@ public/
 wordpress/yapd-headless/      plugin WordPress (modèle de contenu)
 ```
 
+## État actuel de WordPress (cms.yapd4africa.org)
+
+| Contenu | Source |
+| --- | --- |
+| Actualités | **Articles WordPress**, complétés par les articles locaux qui n'ont pas encore été recréés dans WordPress (même slug = la version WordPress l'emporte) |
+| Projets, équipe, rapports, partenaires, réglages | Données locales, en attendant l'installation du plugin `yapd-headless` |
+
+Conseils de rédaction des articles :
+- Utiliser l'**éditeur de blocs** de WordPress, pas le Divi Builder. Les shortcodes Divi restants sont retirés, mais leur mise en page est perdue.
+- Toujours définir une **image à la une**, qui sert de vignette et d'image de partage.
+- Renseigner l'**extrait**. S'il est vide, les 40 premiers mots de l'article sont utilisés.
+
+## Mise à jour automatique (build hook)
+
+1. Dans Netlify : *Project configuration → Build & deploy → Continuous deployment → Build hooks → Add build hook*. Nom : `WordPress`, branche : `main`. Copier l'URL obtenue.
+2. Copier `wordpress/netlify-build-hook.php` dans `wp-content/mu-plugins/` sur le serveur Infomaniak.
+3. Dans `wp-config.php`, ajouter `define( 'YAPD_NETLIFY_BUILD_HOOK', 'https://api.netlify.com/build_hooks/…' );`
+
+Chaque publication, mise à jour, dépublication ou suppression relance alors le site, qui est à jour en 1 à 2 minutes. Un bouton **Rebuild website** apparaît aussi dans la barre d'administration. L'URL du hook reste hors de la base de données et de git.
+
 ## Brancher WordPress
 
 1. Installer WordPress (ex. `cms.yapd4africa.org`) avec les permaliens activés (« Titre de la publication »).
 2. Installer et activer **Advanced Custom Fields** (la version gratuite suffit).
 3. Copier `wordpress/yapd-headless/` dans `wp-content/plugins/` et l'activer.
 4. Optionnel : **Yoast SEO**. Le titre et la description Yoast des articles sont repris par le site.
-5. Dans Netlify : *Site configuration → Environment variables* → `WP_URL=https://cms.yapd4africa.org`.
+5. Dans Netlify : *Project configuration → Environment variables* → `WP_API_URL=https://cms.yapd4africa.org/wp-json/wp/v2`.
 6. Dans Netlify : *Build & deploy → Build hooks* → créer un hook, puis le coller dans WordPress → *Réglages → YAPD4Africa site → Netlify build hook URL*. Chaque publication relance alors un build (1 à 2 min).
 
 ### Modèle de contenu
@@ -89,7 +109,7 @@ La page `/support-us` affiche un bouton « Donate online » dès qu'un lien de d
 
 | Variable | Rôle |
 | --- | --- |
-| `WP_URL` | URL du WordPress (vide = données locales) |
+| `WP_API_URL` | API REST WordPress, ex. `https://cms.yapd4africa.org/wp-json/wp/v2` (vide = données locales) |
 | `PUBLIC_PLAUSIBLE_DOMAIN` | Optionnel. Active Plausible Analytics, sans cookie et sans bannière de consentement (ex. `yapd4africa.org`). |
 | `PUBLIC_GA_ID` | Optionnel. Active Google Analytics 4 (ex. `G-XXXXXXX`). |
 | `PUBLIC_GOOGLE_SITE_VERIFICATION` | Optionnel. Code de vérification Google Search Console (méthode « balise HTML »). |

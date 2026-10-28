@@ -3,16 +3,21 @@
 
 import type { Media } from "./types";
 
-export const WP_URL = (import.meta.env.WP_URL ?? "").replace(/\/+$/, "");
-export const isWordPressEnabled = WP_URL !== "";
+/** Base of the core REST API, e.g. https://cms.yapd4africa.org/wp-json/wp/v2 */
+export const WP_API_URL = (import.meta.env.WP_API_URL ?? "").replace(/\/+$/, "");
+/** Root of all REST namespaces (…/wp-json), used for custom endpoints. */
+const WP_JSON_ROOT = WP_API_URL.replace(/\/wp\/v2$/, "");
+export const isWordPressEnabled = WP_API_URL !== "";
 
 const PER_PAGE = 100;
+const TIMEOUT_MS = 15_000;
 const cache = new Map<string, Promise<unknown>>();
 
 async function fetchJson(url: URL): Promise<Response> {
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  const res = await fetch(url, { headers: { Accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!res.ok) {
-    throw new Error(`WordPress request failed (${res.status} ${res.statusText}): ${url}`);
+    const hint = res.status === 404 ? " (route not found: content type not set up in WordPress yet)" : "";
+    throw new Error(`HTTP ${res.status} on ${url.pathname}${hint}`);
   }
   return res;
 }
@@ -28,7 +33,7 @@ export function getCollection<T>(type: string, params: Record<string, string> = 
         let page = 1;
         let totalPages = 1;
         do {
-          const url = new URL(`${WP_URL}/wp-json/wp/v2/${type}`);
+          const url = new URL(`${WP_API_URL}/${type}`);
           url.search = new URLSearchParams({
             per_page: String(PER_PAGE),
             page: String(page),
@@ -53,7 +58,7 @@ export function getEndpoint<T>(route: string): Promise<T> {
   if (!cache.has(route)) {
     cache.set(
       route,
-      fetchJson(new URL(`${WP_URL}/wp-json/${route}`)).then((res) => res.json()),
+      fetchJson(new URL(`${WP_JSON_ROOT}/${route}`)).then((res) => res.json()),
     );
   }
   return cache.get(route) as Promise<T>;
@@ -114,6 +119,11 @@ export function decodeEntities(text: string): string {
     }
     return ENTITIES[code.toLowerCase()] ?? match;
   });
+}
+
+/** Removes leftover page-builder shortcodes such as [et_pb_section] (Divi). */
+export function stripShortcodes(html = ""): string {
+  return html.replace(/\[\/?et_pb_[^\]]*\]/g, "");
 }
 
 /** Converts rendered HTML (title, excerpt) to plain text. */

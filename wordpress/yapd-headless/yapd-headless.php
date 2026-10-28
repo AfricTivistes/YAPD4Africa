@@ -487,6 +487,10 @@ function yapd_render_settings_page(): void {
  * ---------------------------------------------------------------------- */
 
 function yapd_trigger_build(): void {
+	// The netlify-build-hook.php must-use plugin, when installed, already handles rebuilds.
+	if ( function_exists( 'yapd_netlify_trigger_build' ) ) {
+		return;
+	}
 	static $triggered = false;
 	$hook = yapd_get_settings()['build_hook'] ?? '';
 	if ( $triggered || ! $hook ) {
