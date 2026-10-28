@@ -22,3 +22,6 @@ npm-debug.log*
 
 # Raw source material (Word docs, uncompressed PDFs): processed into src/ and public/
 ressources/
+
+# Generated WordPress theme package (npm run theme:zip)
+wordpress/*.zip

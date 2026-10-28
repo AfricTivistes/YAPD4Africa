@@ -4,7 +4,7 @@ Site de [yapd4africa.org](https://yapd4africa.org), construit avec [Astro](https
 
 - **Front-end** : Astro 7 + Tailwind CSS 4, déployé sur Netlify. Aucun framework JS côté client.
 - **Back-end** : WordPress, lu via l'API REST **au moment du build**. WordPress n'est jamais appelé par les visiteurs.
-- **Repli local** : tant que `WP_URL` n'est pas défini (ou qu'un type de contenu est vide dans WordPress), le site utilise les données de `src/data/`.
+- **Repli local** : si `WP_API_URL` n'est pas défini, si un type de contenu est vide dans WordPress ou si WordPress ne répond pas pendant le build, le site utilise les données de `src/data/`. Un build n'échoue jamais à cause de WordPress : un avertissement `[wordpress]` apparaît dans les logs Netlify.
 
 ## Développement
 
@@ -12,7 +12,7 @@ Prérequis : Node.js ≥ 22.23 (`nvm use` lit `.nvmrc`).
 
 ```sh
 npm install
-cp .env.example .env   # puis renseigner WP_URL, ou le laisser vide
+cp .env.example .env   # puis renseigner WP_API_URL, ou le laisser vide
 npm run dev            # http://localhost:4321
 npm run build          # vérification TypeScript + build dans dist/
 npm run preview
@@ -36,17 +36,42 @@ src/
 public/
   reports/          PDF des rapports (repli local)
   images/           logo et image Open Graph par défaut
-wordpress/yapd-headless/      plugin WordPress (modèle de contenu)
+wordpress/yapd4africa-headless/  thème WordPress du CMS (modèle de contenu, build hook, redirections)
 ```
 
-## Brancher WordPress
+## WordPress (cms.yapd4africa.org)
 
-1. Installer WordPress (ex. `cms.yapd4africa.org`) avec les permaliens activés (« Titre de la publication »).
-2. Installer et activer **Advanced Custom Fields** (la version gratuite suffit).
-3. Copier `wordpress/yapd-headless/` dans `wp-content/plugins/` et l'activer.
-4. Optionnel : **Yoast SEO**. Le titre et la description Yoast des articles sont repris par le site.
-5. Dans Netlify : *Site configuration → Environment variables* → `WP_URL=https://cms.yapd4africa.org`.
-6. Dans Netlify : *Build & deploy → Build hooks* → créer un hook, puis le coller dans WordPress → *Réglages → YAPD4Africa site → Netlify build hook URL*. Chaque publication relance alors un build (1 à 2 min).
+Le CMS est hébergé chez Infomaniak. Il utilise le thème **YAPD4Africa Headless** ([wordpress/yapd4africa-headless](wordpress/yapd4africa-headless)), qui :
+
+- **crée le modèle de contenu** : Projects, Team & Trustees, Reports, Partners, les champs ACF et la page *Réglages → YAPD4Africa site* ;
+- **reconstruit le site sur Netlify** à chaque publication, mise à jour, dépublication ou suppression (le site est à jour en 1 à 2 minutes). Il ajoute un bouton *Rebuild website now* et un widget sur le tableau de bord ;
+- **redirige les visiteurs** de `cms.yapd4africa.org` (301) vers la page équivalente de `yapd4africa.org`, et marque le CMS `noindex`. Seul le site public est indexé. L'administration, l'API et la prévisualisation des brouillons continuent de fonctionner ;
+- **désactive les commentaires**, que le site n'utilise pas.
+
+### Installation
+
+1. `npm run theme:zip`, qui produit `wordpress/yapd4africa-headless.zip`.
+2. WordPress → *Apparence → Thèmes → Ajouter → Téléverser un thème* → choisir le zip → **Activer**.
+3. *Extensions → Ajouter* → installer et activer **Advanced Custom Fields** (version gratuite).
+4. *Réglages → YAPD4Africa site → Netlify build hook URL* : coller l'URL du build hook (Netlify → *Project configuration → Build & deploy → Build hooks*). Pour garder ce secret hors de la base de données, on peut aussi le définir dans `wp-config.php` : `define( 'YAPD_NETLIFY_BUILD_HOOK', '…' );`.
+5. Netlify → *Environment variables* : `WP_API_URL=https://cms.yapd4africa.org/wp-json/wp/v2`.
+
+Pour mettre à jour le thème, téléverser le nouveau zip ; WordPress propose de remplacer la version installée.
+
+### Règles de bascule entre données locales et WordPress
+
+- **Actualités** : articles WordPress + articles locaux pas encore recréés dans WordPress. À slug identique, c'est la version WordPress qui s'affiche.
+- **Projets, équipe, rapports, partenaires** : tant qu'un type n'a **aucune** entrée publiée dans WordPress, le site utilise les données locales. **Dès la première entrée publiée, seul WordPress est utilisé pour ce type** : il faut donc importer le contenu existant avant de commencer à saisir.
+- Si WordPress ne répond pas pendant un build (délai de 15 s), le site utilise les données locales et le build réussit, avec un avertissement `[wordpress]` dans les logs Netlify.
+
+### Rédaction
+
+- Utiliser l'**éditeur de blocs**, pas le Divi Builder. Les éventuels shortcodes Divi sont retirés.
+- Toujours définir une **image à la une**, qui sert de vignette et d'image de partage, avec un texte alternatif.
+- Renseigner l'**extrait**. S'il est vide, les 40 premiers mots de l'article sont utilisés.
+- Le slug d'un projet devient son URL `/what-we-do/<slug>`. Pour garder les URLs actuelles, reprendre les slugs de `src/data/projects.ts`.
+- L'ordre des projets, de l'équipe et des partenaires suit le champ **Ordre** (attributs de page).
+- Optionnel : **Yoast SEO**. Le titre et la description Yoast des articles sont repris par le site.
 
 ### Modèle de contenu
 
@@ -59,10 +84,6 @@ wordpress/yapd-headless/      plugin WordPress (modèle de contenu)
 | Partners                | `wp/v2/partners`           | bandeau partenaires (accueil)        | nom, logo (image à la une), `website`                                |
 | Réglages → YAPD4Africa site | `yapd/v1/settings`     | footer, contact, `/support-us`, chiffres d'impact | email, téléphone, adresse, lien de don, réseaux sociaux, 6 chiffres d'impact |
 
-- L'ordre des projets, de l'équipe et des partenaires suit le champ **Ordre** (attributs de page).
-- Le slug WordPress d'un projet devient son URL : `/what-we-do/<slug>`. Pour garder les URLs actuelles, reprendre les slugs de `src/data/projects.ts`.
-- Un type de contenu **sans aucune entrée publiée** retombe sur les données locales. Dès qu'une entrée est publiée, seules les données WordPress sont utilisées pour ce type.
-- Si WordPress est injoignable pendant un build, le build échoue volontairement, et Netlify garde la version en ligne précédente.
 
 ## Ajouter des contenus sans WordPress
 
@@ -89,7 +110,7 @@ La page `/support-us` affiche un bouton « Donate online » dès qu'un lien de d
 
 | Variable | Rôle |
 | --- | --- |
-| `WP_URL` | URL du WordPress (vide = données locales) |
+| `WP_API_URL` | API REST WordPress, ex. `https://cms.yapd4africa.org/wp-json/wp/v2` (vide = données locales) |
 | `PUBLIC_PLAUSIBLE_DOMAIN` | Optionnel. Active Plausible Analytics, sans cookie et sans bannière de consentement (ex. `yapd4africa.org`). |
 | `PUBLIC_GA_ID` | Optionnel. Active Google Analytics 4 (ex. `G-XXXXXXX`). |
 | `PUBLIC_GOOGLE_SITE_VERIFICATION` | Optionnel. Code de vérification Google Search Console (méthode « balise HTML »). |

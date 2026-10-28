@@ -4,11 +4,11 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { loadEnv } from "vite";
 
-const { WP_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
+const { WP_API_URL } = loadEnv(process.env.NODE_ENV ?? "production", process.cwd(), "");
 
 // Images coming from WordPress are downloaded and optimized at build time,
 // so the WordPress host has to be explicitly allowed.
-const imageDomains = WP_URL ? [new URL(WP_URL).hostname] : [];
+const imageDomains = WP_API_URL ? [new URL(WP_API_URL).hostname] : [];
 
 export default defineConfig({
   site: "https://yapd4africa.org",

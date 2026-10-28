@@ -1,13 +1,10 @@
 <?php
 /**
- * Plugin Name:       YAPD4Africa Headless
- * Description:       Content model (projects, team, reports, partners, site settings) and Netlify rebuild trigger for the yapd4africa.org Astro front-end.
- * Version:           1.0.0
- * Requires at least: 6.4
- * Requires PHP:      8.0
- * Author:            AfricTivistes
- * License:           GPL-2.0-or-later
- * Text Domain:       yapd-headless
+ * Content model read by the Astro front-end through the REST API:
+ * custom post types, ACF field groups, extra REST data and the
+ * Settings > YAPD4Africa site page.
+ *
+ * Field names must match src/lib/content.ts in the website repository.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -270,15 +267,6 @@ function yapd_register_fields(): void {
 	);
 }
 
-add_action(
-	'admin_notices',
-	static function (): void {
-		if ( ! function_exists( 'acf_add_local_field_group' ) && current_user_can( 'activate_plugins' ) ) {
-			echo '<div class="notice notice-warning"><p><strong>YAPD4Africa Headless:</strong> install and activate the <em>Advanced Custom Fields</em> plugin to edit project, team, report and partner details.</p></div>';
-		}
-	}
-);
-
 /* -------------------------------------------------------------------------
  * Extra REST data
  * ---------------------------------------------------------------------- */
@@ -363,7 +351,7 @@ function yapd_settings_fields(): array {
 			'title'  => 'Contact details',
 			'fields' => array(
 				'email'   => array( 'Email', 'email' ),
-				'phone'   => array( 'Phone (international format, e.g. +2348167185897)', 'text' ),
+				'phone'   => array( 'Phone (international format, e.g. +2347047335782)', 'text' ),
 				'address' => array( 'Address', 'text' ),
 			),
 		),
@@ -390,7 +378,7 @@ function yapd_settings_fields(): array {
 		'deploy'  => array(
 			'title'  => 'Deployment',
 			'fields' => array(
-				'build_hook' => array( 'Netlify build hook URL (rebuilds the website when content is published)', 'url' ),
+				'build_hook' => array( 'Netlify build hook URL (Netlify > Project configuration > Build & deploy > Build hooks). Ignored if YAPD_NETLIFY_BUILD_HOOK is defined in wp-config.php.', 'url' ),
 			),
 		),
 	);
@@ -481,48 +469,3 @@ function yapd_render_settings_page(): void {
 	</div>
 	<?php
 }
-
-/* -------------------------------------------------------------------------
- * Rebuild the static site when published content changes
- * ---------------------------------------------------------------------- */
-
-function yapd_trigger_build(): void {
-	static $triggered = false;
-	$hook = yapd_get_settings()['build_hook'] ?? '';
-	if ( $triggered || ! $hook ) {
-		return;
-	}
-	$triggered = true;
-	wp_remote_post(
-		$hook,
-		array(
-			'blocking' => false,
-			'timeout'  => 5,
-		)
-	);
-}
-
-add_action(
-	'transition_post_status',
-	static function ( string $new_status, string $old_status, WP_Post $post ): void {
-		$types = array( 'post', 'yapd_project', 'yapd_team', 'yapd_report', 'yapd_partner' );
-		if ( in_array( $post->post_type, $types, true ) && ( 'publish' === $new_status || 'publish' === $old_status ) ) {
-			yapd_trigger_build();
-		}
-	},
-	10,
-	3
-);
-
-// Edits to an already published entry (including ACF fields, saved after the post itself).
-add_action(
-	'acf/save_post',
-	static function ( $post_id ): void {
-		if ( is_numeric( $post_id ) && 'publish' === get_post_status( (int) $post_id ) ) {
-			yapd_trigger_build();
-		}
-	},
-	20
-);
-
-add_action( 'update_option_' . YAPD_OPTION, 'yapd_trigger_build' );
