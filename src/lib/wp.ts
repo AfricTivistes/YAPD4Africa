@@ -1,5 +1,5 @@
 // Minimal WordPress REST API client, used at build time only.
-// The content model it expects is registered by the plugin in wordpress/yapd-headless.
+// The content model it expects is registered by the WordPress theme in wordpress/yapd4africa-headless.
 
 import type { Media } from "./types";
 
@@ -87,7 +87,7 @@ export interface WPEntry<Acf = Record<string, unknown>> {
   menu_order?: number;
   acf?: Acf;
   yoast_head_json?: { title?: string; description?: string };
-  /** Added by the yapd-headless plugin on reports. */
+  /** Added by the yapd4africa-headless theme on reports. */
   yapd_file_size?: string | null;
   _embedded?: { "wp:featuredmedia"?: WPMedia[] };
 }
