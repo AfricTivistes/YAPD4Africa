@@ -1,0 +1,39 @@
+---
+import Icon from "./Icon.astro";
+import type { SocialLinks } from "@/lib/types";
+
+interface Props {
+  socials: SocialLinks;
+  class?: string;
+  linkClass?: string;
+}
+
+const { socials, class: className = "flex flex-wrap gap-3", linkClass = "" } = Astro.props;
+
+const networks = [
+  { key: "linkedin", label: "LinkedIn", icon: "fa6-brands:linkedin-in" },
+  { key: "x", label: "X (Twitter)", icon: "fa6-brands:x-twitter" },
+  { key: "instagram", label: "Instagram", icon: "fa6-brands:instagram" },
+  { key: "facebook", label: "Facebook", icon: "fa6-brands:facebook-f" },
+  { key: "youtube", label: "YouTube", icon: "fa6-brands:youtube" },
+] as const;
+---
+
+<ul class={className}>
+  {
+    networks
+      .filter((n) => socials[n.key])
+      .map((n) => (
+        <li>
+          <a
+            href={socials[n.key]}
+            target="_blank"
+            rel="noopener noreferrer me"
+            class:list={["flex h-11 w-11 items-center justify-center rounded-full transition-colors", linkClass]}
+          >
+            <Icon name={n.icon} class="h-5 w-5" label={`YAPD4Africa on ${n.label}`} />
+          </a>
+        </li>
+      ))
+  }
+</ul>

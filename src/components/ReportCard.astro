@@ -1,0 +1,45 @@
+---
+import Img from "./Img.astro";
+import Icon from "./Icon.astro";
+import type { Report } from "@/lib/types";
+
+interface Props {
+  report: Report;
+}
+
+const { report } = Astro.props;
+---
+
+<li
+  class="card group relative flex flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+  data-reveal
+>
+  {
+    report.cover ? (
+      <div class="aspect-[3/2] overflow-hidden bg-sand">
+        <Img
+          media={report.cover}
+          class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          widths={[400, 800]}
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        />
+      </div>
+    ) : (
+      <div class="flex aspect-[3/2] items-center justify-center bg-gradient-to-br from-emerald-600 to-brand-deep text-white">
+        <Icon name="lucide:file-text" class="h-16 w-16" />
+      </div>
+    )
+  }
+  <div class="flex flex-1 flex-col p-6">
+    <p class="mb-2 flex items-center gap-2 text-sm text-gray-500">
+      <Icon name="lucide:calendar" class="h-4 w-4" />
+      <time datetime={report.date}>{report.date.slice(0, 4)}</time>
+    </p>
+    <h3 class="mb-3 text-lg leading-snug">{report.title}</h3>
+    {report.description && <p class="mb-6 text-gray-600">{report.description}</p>}
+    <a href={report.fileUrl} target="_blank" rel="noopener" class="btn-primary mt-auto w-full after:absolute after:inset-0">
+      <Icon name="lucide:download" class="h-4 w-4" />
+      Download PDF{report.fileSize && ` (${report.fileSize})`}
+    </a>
+  </div>
+</li>

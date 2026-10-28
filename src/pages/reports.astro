@@ -1,0 +1,86 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ReportCard from "@/components/ReportCard.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Img from "@/components/Img.astro";
+import Icon from "@/components/Icon.astro";
+import community from "@/assets/images/home/community-boat.jpg";
+import { getReports } from "@/lib/content";
+import type { ReportType } from "@/lib/types";
+
+const reports = await getReports();
+const featured = reports.find((r) => r.type === "annual");
+const groups: { type: ReportType; eyebrow: string; title: string; subtitle: string }[] = [
+  { type: "annual", eyebrow: "Accountability", title: "Annual & Strategic Reports", subtitle: "Our yearly results and the strategy that guides us." },
+  { type: "project", eyebrow: "From the field", title: "Project Reports", subtitle: "Needs assessments, evaluations and field reports from our initiatives." },
+  { type: "research", eyebrow: "Free resources", title: "Guides & Toolkits", subtitle: "Practical tools for citizens, free to download and share." },
+];
+---
+
+<BaseLayout
+  title="Reports & Publications"
+  description="Download YAPD4Africa's impact reports, community needs assessments and project reports from our work in Kaduna State and across Nigeria."
+  image={community}
+>
+  <PageHero
+    eyebrow="Transparency"
+    title="Reports & Publications"
+    intro="Transparency is one of our core values. Download our annual reports, field reports and citizen toolkits, free of charge."
+    image={{ src: community, alt: "YAPD4Africa team on a field visit to a riverside community" }}
+  />
+
+  {
+    featured && (
+      <section class="bg-sand pt-16 md:pt-20">
+        <div class="container-site">
+          <div class="card grid items-center gap-8 overflow-hidden p-6 md:grid-cols-[auto_1fr] md:gap-12 md:p-10">
+            {featured.cover && (
+              <div class="mx-auto w-48 overflow-hidden rounded-lg shadow-xl md:w-60">
+                <Img media={featured.cover} class="w-full" widths={[240, 480]} sizes="15rem" loading="eager" />
+              </div>
+            )}
+            <div>
+              <p class="mb-3 inline-flex rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-wide text-brand-deep uppercase">
+                Latest · {featured.date.slice(0, 4)}
+              </p>
+              <h2 class="text-2xl leading-tight md:text-3xl">{featured.title}</h2>
+              {featured.description && <p class="mt-3 text-lg text-gray-600">{featured.description}</p>}
+              <a href={featured.fileUrl} target="_blank" rel="noopener" class="btn-primary mt-6">
+                <Icon name="lucide:download" class="h-4 w-4" />
+                Download the report{featured.fileSize && ` (${featured.fileSize})`}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    groups.map(({ type, eyebrow, title, subtitle }, i) => {
+      const items = reports.filter((r) => r.type === type && r !== featured);
+      if (items.length === 0) return null;
+      return (
+        <section class:list={["section", i % 2 ? "bg-white" : "bg-sand"]}>
+          <div class="container-site">
+            <SectionHeading eyebrow={eyebrow} title={title} subtitle={subtitle} />
+            <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {items.map((report) => (
+                <ReportCard report={report} />
+              ))}
+            </ul>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <CtaBand
+    title="Can't Find What You're Looking For?"
+    text="Contact us to request specific reports or publications that are not listed on this page."
+    label="Request a Report"
+    href="/contact"
+  />
+</BaseLayout>

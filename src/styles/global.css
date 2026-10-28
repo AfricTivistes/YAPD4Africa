@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@source not "../../attached_assets";
+@source not "../../wordpress";
+@source not "../../dist";
+
+/* Metric-matched local fallbacks: the page doesn't jump when the web fonts load. */
+@font-face {
+  font-family: "Poppins Fallback";
+  src: local("Arial");
+  size-adjust: 112.5%;
+  ascent-override: 93%;
+  descent-override: 31%;
+  line-gap-override: 9%;
+}
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  size-adjust: 113%;
+  ascent-override: 85%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@theme {
+  --font-sans: "Poppins", "Poppins Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", "Montserrat Fallback", ui-sans-serif, system-ui, sans-serif;
+
+  /* Logo green, tuned for AA contrast with white text. */
+  --color-brand: #0f7d32;
+  --color-brand-dark: #0b6a2a;
+  --color-brand-light: #22a33a;
+  /* Deep forest green for dark sections. */
+  --color-brand-deep: #0a2e1c;
+  /* Warm "sun" accent for highlights and the donate action. */
+  --color-accent: #f5b301;
+  --color-accent-dark: #b45309;
+  /* Warm off-white for alternating sections. */
+  --color-sand: #f7f5ef;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-white font-sans text-gray-700 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold tracking-tight text-balance text-gray-900;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand;
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility section {
+  padding-block: 4rem;
+
+  @media (width >= 48rem) {
+    padding-block: 6rem;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-semibold transition-colors duration-200;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white hover:bg-brand-dark;
+}
+@utility btn-accent {
+  @apply btn bg-accent text-brand-deep hover:bg-amber-300;
+}
+@utility btn-light {
+  @apply btn bg-white text-brand-dark hover:bg-emerald-50;
+}
+@utility btn-outline-light {
+  @apply btn border-2 border-white/40 text-white hover:border-white hover:bg-white/10;
+}
+
+@utility btn-outline {
+  @apply btn border-2 border-brand/25 text-brand hover:border-brand hover:bg-brand/5;
+}
+
+/* Small uppercase label above headings. */
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-sm font-semibold tracking-[0.14em] text-brand uppercase;
+}
+
+@utility card {
+  @apply rounded-2xl border border-gray-200/80 bg-white;
+}
+
+/* Reveal-on-scroll. Only hides content when JS is running (see BaseLayout). */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Partners logo strip */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .marquee-track [aria-hidden="true"] {
+    display: none;
+  }
+}

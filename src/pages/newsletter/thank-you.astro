@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+---
+
+<BaseLayout title="Subscribed" noindex>
+  <section class="section">
+    <div class="container-site max-w-2xl text-center">
+      <span class="mb-6 inline-flex rounded-full bg-emerald-100 p-4 text-brand">
+        <Icon name="lucide:mail-check" class="h-12 w-12" />
+      </span>
+      <h1 class="mb-4 text-4xl text-gray-900">You're subscribed!</h1>
+      <p class="mb-8 text-lg text-gray-600">
+        Thank you for joining the YAPD4Africa community. You'll hear from us when we have news from the field.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/" class="btn-primary">Back to home</a>
+        <a href="/support-us" class="btn border-2 border-brand text-brand hover:bg-emerald-50">Support our work</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

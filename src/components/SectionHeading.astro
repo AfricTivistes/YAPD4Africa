@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  /** Small uppercase label above the title. */
+  eyebrow?: string;
+  centered?: boolean;
+  as?: "h1" | "h2";
+  /** Light text for dark backgrounds. */
+  inverted?: boolean;
+}
+
+const { title, subtitle, eyebrow, centered = false, as: Tag = "h2", inverted = false } = Astro.props;
+---
+
+<div class:list={["mb-10 md:mb-14", centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"]} data-reveal>
+  {
+    eyebrow && (
+      <p class:list={["eyebrow mb-3", inverted && "text-accent", centered && "justify-center"]}>
+        <span class:list={["h-px w-8", inverted ? "bg-accent" : "bg-brand"]} aria-hidden="true" />
+        {eyebrow}
+      </p>
+    )
+  }
+  <Tag class:list={["text-3xl leading-tight md:text-[2.75rem]", inverted && "text-white"]}>
+    <slot name="title">{title}</slot>
+  </Tag>
+  {subtitle && <p class:list={["mt-4 text-lg leading-relaxed", inverted ? "text-white/80" : "text-gray-600"]}>{subtitle}</p>}
+</div>

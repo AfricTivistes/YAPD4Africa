@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Img from "@/components/Img.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import meeting from "@/assets/images/home/community-meeting.jpg";
+import boat from "@/assets/images/home/community-boat.jpg";
+import { approach } from "@/data/content";
+import { getProjects } from "@/lib/content";
+
+const projects = await getProjects();
+const homegrown = projects.filter((p) => p.category === "homegrown");
+const past = projects.filter((p) => p.category === "past");
+---
+
+<BaseLayout
+  title="What We Do: Programs for Civic Engagement, Accountability and Development"
+  description="Discover YAPD4Africa's programs: CAL, the LAW Project, the NaijaAdvocate Fellowship, Murya, Kuri'a and Rescue A Girl, empowering grassroots communities in Nigeria and across Africa."
+  image={meeting}
+>
+  <PageHero
+    eyebrow="What we do"
+    title="Turning citizen voices into lasting change"
+    intro="Civic education, accountability, healthcare and clean water: our programs are designed with grassroots communities, and driven by data and young leaders."
+    image={{ src: meeting, alt: "YAPD4Africa facilitators holding a community meeting in a village" }}
+  >
+    <nav aria-label="On this page" class="mt-8 flex flex-wrap gap-3">
+      <a href="#programs" class="btn-accent">Our programs</a>
+      <a href="#completed" class="btn-outline-light">Completed projects</a>
+    </nav>
+  </PageHero>
+
+  <section class="section bg-white">
+    <div class="container-site grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="Our approach"
+          title="The CARE-SD framework"
+          subtitle="Community-led strategies for lasting change, built on six interconnected pillars."
+        />
+        <ul class="grid gap-x-6 gap-y-4 sm:grid-cols-2" data-reveal>
+          {
+            approach.map((pillar) => (
+              <li class="flex items-center gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand font-display font-bold text-white">
+                  {pillar.title[0]}
+                </span>
+                <span class="font-semibold text-gray-800">{pillar.title}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="overflow-hidden rounded-[2rem] shadow-xl" data-reveal>
+        <Image
+          src={boat}
+          alt="YAPD4Africa team crossing a river by boat to reach a remote community"
+          class="aspect-[4/3] w-full object-cover"
+          width={1200}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" class="section bg-sand">
+    <div class="container-site">
+      <SectionHeading
+        eyebrow="Our programs"
+        title="Homegrown initiatives"
+        subtitle="Locally developed programs addressing specific community needs."
+      />
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {homegrown.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    past.length > 0 && (
+      <section id="completed" class="section bg-white">
+        <div class="container-site">
+          <SectionHeading
+            eyebrow="Track record"
+            title="Completed projects"
+            subtitle="Past projects and campaigns that shaped our work."
+          />
+          <div class="grid gap-6 lg:grid-cols-2">
+            {past.map((project) => (
+              <article
+                class="card group relative grid overflow-hidden transition-all duration-300 hover:shadow-xl sm:grid-cols-[2fr_3fr]"
+                data-reveal
+              >
+                <Img
+                  media={project.image}
+                  class="aspect-[4/3] h-full w-full object-cover sm:aspect-auto"
+                  widths={[360, 640]}
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 40vw, 100vw"
+                />
+                <div class="flex flex-col p-6">
+                  {project.period && <p class="mb-2 text-sm font-semibold text-accent-dark">{project.period}</p>}
+                  <h3 class="mb-2 text-xl group-hover:text-brand">
+                    <a href={`/what-we-do/${project.slug}`} class="after:absolute after:inset-0">
+                      {project.title}
+                    </a>
+                  </h3>
+                  <p class="mb-4 text-gray-600">{project.summary}</p>
+                  <span class="mt-auto inline-flex items-center gap-2 font-semibold text-brand">
+                    Read the story <Icon name="lucide:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand
+    title="Join us in creating positive change"
+    text="Whether you want to volunteer, partner or donate, there are many ways to contribute to YAPD4Africa's mission."
+    label="Get involved today"
+  />
+</BaseLayout>

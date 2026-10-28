@@ -1,0 +1,171 @@
+---
+import { getImage } from "astro:assets";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { cleanPath, getSettings } from "@/lib/content";
+import type { Media } from "@/lib/types";
+import { FOUNDING_YEAR, ORG_LEGAL_NAME, SITE_DESCRIPTION, SITE_NAME } from "@/data/content";
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/montserrat/latin-700.css";
+import poppins400 from "@fontsource/poppins/files/poppins-latin-400-normal.woff2?url";
+import montserrat700 from "@fontsource/montserrat/files/montserrat-latin-700-normal.woff2?url";
+import "@/styles/global.css";
+
+interface Props {
+  /** Page title, suffixed with the site name unless `fullTitle` is set. */
+  title?: string;
+  fullTitle?: string;
+  description?: string;
+  image?: Media["src"];
+  type?: "website" | "article";
+  publishedTime?: string;
+  noindex?: boolean;
+  /** Extra JSON-LD objects for this page (the Organization is always included). */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  fullTitle,
+  description = SITE_DESCRIPTION,
+  image,
+  type = "website",
+  publishedTime,
+  noindex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const settings = await getSettings();
+const site = Astro.site!;
+const pageTitle = fullTitle ?? (title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} - ${ORG_LEGAL_NAME}`);
+const canonical = new URL(cleanPath(Astro.url), site).href;
+
+let ogImage = new URL("/images/og-default.jpg", site).href;
+if (typeof image === "string") {
+  ogImage = image;
+} else if (image) {
+  const optimized = await getImage({ src: image, width: 1200, height: 630, fit: "cover", format: "jpg" });
+  ogImage = new URL(optimized.src, site).href;
+}
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "@id": new URL("/#organization", site).href,
+  name: SITE_NAME,
+  legalName: ORG_LEGAL_NAME,
+  url: site.href,
+  logo: new URL("/images/logo.png", site).href,
+  description: SITE_DESCRIPTION,
+  foundingDate: String(FOUNDING_YEAR),
+  email: settings.email,
+  telephone: settings.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Hayin Banki",
+    addressLocality: "Kaduna",
+    addressRegion: "Kaduna State",
+    addressCountry: "NG",
+  },
+  sameAs: Object.values(settings.socials).filter(Boolean),
+};
+const structuredData = [organization, ...jsonLd];
+
+// Optional integrations, enabled through environment variables (see .env.example).
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_GB" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@YAPD4Africa" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/icon-512.png" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#008000" />
+
+    <link rel="preload" href={poppins400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={montserrat700} as="font" type="font/woff2" crossorigin />
+
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    {plausibleDomain && <script is:inline defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" />}
+    {
+      gaId && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", gaId);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only z-[60] rounded bg-white px-4 py-2 font-semibold text-brand focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer settings={settings} />
+
+    <script>
+      const targets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px" },
+        );
+        targets.forEach((el) => observer.observe(el));
+      } else {
+        targets.forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>

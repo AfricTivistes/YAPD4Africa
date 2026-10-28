@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import PostCard from "@/components/PostCard.astro";
+import { getPosts } from "@/lib/content";
+
+const posts = await getPosts();
+---
+
+<BaseLayout
+  title="News & Updates"
+  description="The latest news, recognitions and stories from YAPD4Africa's work with grassroots communities across Africa."
+>
+  <PageHero eyebrow="News" title="News & Updates" intro="Stories from the field, recognitions and announcements from YAPD4Africa." />
+  <section class="section bg-gray-50">
+    <div class="container-site">
+      {
+        posts.length > 0 ? (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <PostCard post={post} headingLevel="h2" />
+            ))}
+          </div>
+        ) : (
+          <p class="text-center text-lg text-gray-600">No news yet. Check back soon!</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

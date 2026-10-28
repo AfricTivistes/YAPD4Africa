@@ -1,0 +1,55 @@
+---
+import Img from "./Img.astro";
+import type { Partner } from "@/lib/types";
+
+interface Props {
+  partners: Partner[];
+}
+
+const { partners } = Astro.props;
+// The list is rendered twice so the CSS animation can loop seamlessly;
+// the copy is hidden from assistive technologies.
+const copies = [false, true];
+---
+
+<div class="marquee relative overflow-hidden py-4">
+  <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white" aria-hidden="true"></div>
+  <ul class="marquee-track flex w-max gap-6">
+    {
+      copies.map((hidden) =>
+        partners.map((partner) => {
+          const logo = (
+            <Img
+              media={partner.logo}
+              class="max-h-full max-w-full object-contain"
+              widths={[160, 320]}
+              sizes="160px"
+            />
+          );
+          return (
+            <li
+              aria-hidden={hidden ? "true" : undefined}
+              class="card flex h-32 w-48 shrink-0 items-center justify-center p-5 grayscale-[35%] transition hover:grayscale-0"
+            >
+              {partner.url ? (
+                <a
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabindex={hidden ? -1 : undefined}
+                  title={partner.name}
+                  class="flex h-full w-full items-center justify-center"
+                >
+                  {logo}
+                </a>
+              ) : (
+                logo
+              )}
+            </li>
+          );
+        }),
+      )
+    }
+  </ul>
+</div>

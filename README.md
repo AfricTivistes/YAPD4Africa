@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
+# YAPD4Africa — site web
 
-## Project info
+Site de [yapd4africa.org](https://yapd4africa.org), construit avec [Astro](https://astro.build) (site 100 % statique) et alimenté par un WordPress « headless ».
 
-**URL**: https://lovable.dev/projects/5f148b2b-ff7b-4c90-9a9d-995e856d44a2
+- **Front-end** : Astro 7 + Tailwind CSS 4, déployé sur Netlify. Aucun framework JS côté client.
+- **Back-end** : WordPress, lu via l'API REST **au moment du build**. WordPress n'est jamais appelé par les visiteurs.
+- **Repli local** : tant que `WP_URL` n'est pas défini (ou qu'un type de contenu est vide dans WordPress), le site utilise les données de `src/data/`.
 
-## How can I edit this code?
+## Développement
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/5f148b2b-ff7b-4c90-9a9d-995e856d44a2) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Prérequis : Node.js ≥ 22.23 (`nvm use` lit `.nvmrc`).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+cp .env.example .env   # puis renseigner WP_URL, ou le laisser vide
+npm run dev            # http://localhost:4321
+npm run build          # vérification TypeScript + build dans dist/
+npm run preview
 ```
 
-**Edit a file directly in GitHub**
+## Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+  pages/            routes (une URL = un fichier)
+    what-we-do/[slug].astro   page de chaque projet
+    news/[slug].astro         page de chaque article
+  layouts/BaseLayout.astro    <head> SEO, Open Graph, JSON-LD, header/footer
+  components/       composants .astro
+  lib/
+    wp.ts           client REST WordPress (pagination, cache, helpers)
+    content.ts      getters getProjects(), getPeople(), getReports()… (WordPress → repli local)
+    types.ts        modèle de données
+  data/             contenu de repli + textes éditoriaux fixes (valeurs, CARE-SD, navigation)
+  assets/images/    images optimisées au build (WebP, srcset)
+public/
+  reports/          PDF des rapports (repli local)
+  images/           logo et image Open Graph par défaut
+wordpress/yapd-headless/      plugin WordPress (modèle de contenu)
+```
 
-**Use GitHub Codespaces**
+## Brancher WordPress
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Installer WordPress (ex. `cms.yapd4africa.org`) avec les permaliens activés (« Titre de la publication »).
+2. Installer et activer **Advanced Custom Fields** (la version gratuite suffit).
+3. Copier `wordpress/yapd-headless/` dans `wp-content/plugins/` et l'activer.
+4. Optionnel : **Yoast SEO**. Le titre et la description Yoast des articles sont repris par le site.
+5. Dans Netlify : *Site configuration → Environment variables* → `WP_URL=https://cms.yapd4africa.org`.
+6. Dans Netlify : *Build & deploy → Build hooks* → créer un hook, puis le coller dans WordPress → *Réglages → YAPD4Africa site → Netlify build hook URL*. Chaque publication relance alors un build (1 à 2 min).
 
-## What technologies are used for this project?
+### Modèle de contenu
 
-This project is built with:
+| WordPress (menu)        | Endpoint REST              | Utilisé pour                         | Champs                                                               |
+| ----------------------- | -------------------------- | ------------------------------------ | -------------------------------------------------------------------- |
+| Articles                | `wp/v2/posts`              | `/news`, `/news/[slug]`, accueil     | titre, contenu, extrait, image à la une, `external_url` (optionnel)  |
+| Projects                | `wp/v2/projects`           | `/what-we-do`, `/what-we-do/[slug]`  | titre, contenu, **extrait** (résumé), image, `category`, `impact`, `tags`, `period`, `key_figures` (une ligne par chiffre : `7,000+ | residents with clean water`), `supporters` |
+| Team & Trustees         | `wp/v2/team`               | `/who-are-we`                        | nom (titre), photo, `role`, `group` (staff/trustee), `bio`           |
+| Reports                 | `wp/v2/reports`            | `/reports` + page du projet lié      | titre, couverture (image), `report_type`, `report_date`, `description`, `file` (PDF), `project` (optionnel) |
+| Partners                | `wp/v2/partners`           | bandeau partenaires (accueil)        | nom, logo (image à la une), `website`                                |
+| Réglages → YAPD4Africa site | `yapd/v1/settings`     | footer, contact, `/support-us`, chiffres d'impact | email, téléphone, adresse, lien de don, réseaux sociaux, 6 chiffres d'impact |
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- L'ordre des projets, de l'équipe et des partenaires suit le champ **Ordre** (attributs de page).
+- Le slug WordPress d'un projet devient son URL : `/what-we-do/<slug>`. Pour garder les URLs actuelles, reprendre les slugs de `src/data/projects.ts`.
+- Un type de contenu **sans aucune entrée publiée** retombe sur les données locales. Dès qu'une entrée est publiée, seules les données WordPress sont utilisées pour ce type.
+- Si WordPress est injoignable pendant un build, le build échoue volontairement, et Netlify garde la version en ligne précédente.
 
-## How can I deploy this project?
+## Ajouter des contenus sans WordPress
 
-Simply open [Lovable](https://lovable.dev/projects/5f148b2b-ff7b-4c90-9a9d-995e856d44a2) and click on Share -> Publish.
+Le dossier `ressources/` (ignoré par git) sert de boîte de dépôt pour les fichiers bruts : documents Word, PDF non compressés, photos HEIC. Ces fichiers ne sont jamais publiés tels quels.
 
-## Can I connect a custom domain to my Lovable project?
+- **Rapports PDF** : les compresser (`gs -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook …`), les placer dans `public/reports/`, puis les déclarer dans `src/data/reports.ts`.
+- **Images** : les placer dans `src/assets/images/…`. Astro les optimise au build.
 
-Yes, you can!
+## Formulaires (contact et newsletter)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Les deux formulaires utilisent **Netlify Forms** : `contact` (page Contact) et `newsletter` (footer de toutes les pages).
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Activer la détection des formulaires dans *Site configuration → Forms*.
+2. Configurer les notifications e-mail (par ex. vers yapd2020@gmail.com).
+3. Les inscrits à la newsletter s'exportent en CSV depuis Netlify. On peut aussi les envoyer automatiquement vers Brevo ou Mailchimp (via Zapier ou Make).
+
+Les liens `/contact?subject=Partnership` (ou `Volunteering`) pré-remplissent le sujet du formulaire.
+
+## Dons
+
+La page `/support-us` affiche un bouton « Donate online » dès qu'un lien de don est renseigné dans *Réglages → YAPD4Africa site*, par exemple une page Paystack, Flutterwave ou GlobalGiving. Sans lien, le bouton ouvre un e-mail de contact.
+
+## Variables d'environnement (Netlify)
+
+| Variable | Rôle |
+| --- | --- |
+| `WP_URL` | URL du WordPress (vide = données locales) |
+| `PUBLIC_PLAUSIBLE_DOMAIN` | Optionnel. Active Plausible Analytics, sans cookie et sans bannière de consentement (ex. `yapd4africa.org`). |
+| `PUBLIC_GA_ID` | Optionnel. Active Google Analytics 4 (ex. `G-XXXXXXX`). |
+| `PUBLIC_GOOGLE_SITE_VERIFICATION` | Optionnel. Code de vérification Google Search Console (méthode « balise HTML »). |
+
+Après la mise en ligne, soumettre `https://yapd4africa.org/sitemap-index.xml` dans Google Search Console.
+
+## SEO
+
+- Chaque page a son propre titre, sa description, son URL canonique et son image Open Graph (1200×630, générée au build).
+- JSON-LD : `NGO` sur toutes les pages, `BreadcrumbList` sur les projets, `NewsArticle` sur les articles.
+- `sitemap-index.xml` est généré automatiquement et déclaré dans `robots.txt`.
+- Les anciennes URLs des PDF (`/lovable-uploads/...`) sont redirigées (301) dans `netlify.toml`.

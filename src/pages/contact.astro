@@ -1,0 +1,126 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
+import Icon from "@/components/Icon.astro";
+import { getSettings } from "@/lib/content";
+
+const settings = await getSettings();
+const phoneDisplay = settings.phone.replace(/^\+(\d{3})(\d{3})(\d{3})(\d+)$/, "+$1 $2 $3 $4");
+const field =
+  "w-full rounded-md border border-gray-300 px-4 py-2.5 focus:border-transparent focus:ring-2 focus:ring-brand focus:outline-none";
+const contactItems = [
+  { icon: "lucide:map-pin", title: "Our Address", text: settings.address },
+  { icon: "lucide:mail", title: "Email Us", text: settings.email, href: `mailto:${settings.email}` },
+  { icon: "lucide:phone", title: "Call Us", text: phoneDisplay, href: `tel:${settings.phone}` },
+] as const;
+---
+
+<BaseLayout
+  title="Contact Us: Volunteer, Partner or Get in Touch"
+  description="Get in touch with YAPD4Africa in Kaduna, Nigeria to volunteer, explore partnerships or learn more about our programs."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let's Connect"
+    intro="Join us in our mission to empower African youth. We're here to listen and engage."
+  />
+
+  <section class="section bg-white">
+    <div class="container-site grid gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading title="Get In Touch" />
+        <p class="mb-8 text-gray-700">
+          We're excited to hear from you! Whether you're interested in our programs, want to explore partnership
+          opportunities, or wish to volunteer, we're here to help you make a difference.
+        </p>
+        <ul class="space-y-6">
+          {
+            contactItems.map((item) => (
+              <li class="flex items-start gap-4">
+                <span class="rounded-full bg-emerald-100 p-3 text-brand">
+                  <Icon name={item.icon} class="h-6 w-6" />
+                </span>
+                <div>
+                  <h3 class="mb-1 text-lg text-gray-900">{item.title}</h3>
+                  {"href" in item ? (
+                    <a href={item.href} class="inline-block py-0.5 text-brand hover:text-brand-dark">
+                      {item.text}
+                    </a>
+                  ) : (
+                    <p class="text-gray-600">{item.text}</p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <h3 class="mt-12 mb-4 text-lg text-gray-900">Connect With Us</h3>
+        <SocialLinks socials={settings.socials} linkClass="bg-gray-100 text-gray-700 hover:bg-brand hover:text-white" />
+      </div>
+
+      <div>
+        <SectionHeading title="Send Us a Message" />
+        <!-- Submissions are handled by Netlify Forms (Site configuration > Forms). -->
+        <form
+          name="contact"
+          method="POST"
+          action="/contact/thank-you"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="space-y-6 rounded-lg bg-gray-50 p-6 shadow-lg md:p-8"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>Leave this field empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <div>
+            <label for="name" class="mb-1 block text-sm font-medium text-gray-700">Full Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" class={field} />
+          </div>
+          <div>
+            <label for="email" class="mb-1 block text-sm font-medium text-gray-700">Email Address</label>
+            <input id="email" name="email" type="email" required autocomplete="email" class={field} />
+          </div>
+          <div>
+            <label for="subject" class="mb-1 block text-sm font-medium text-gray-700">Subject</label>
+            <select id="subject" name="subject" required class={field}>
+              <option value="General enquiry">General enquiry</option>
+              <option value="Volunteering">Volunteering</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Report request">Report request</option>
+              <option value="Media">Media</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="mb-1 block text-sm font-medium text-gray-700">Message</label>
+            <textarea id="message" name="message" rows="6" required class={field}></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full rounded-md">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white pb-16">
+    <div class="container-site">
+      <SectionHeading title="Our Location" subtitle="Visit us in Kaduna, Nigeria" centered />
+      <div class="h-[400px] overflow-hidden rounded-lg bg-gray-200 shadow-lg">
+        <iframe
+          title="Map showing the YAPD4Africa office in Kaduna, Nigeria"
+          src="https://www.google.com/maps?q=Hayin+Banki,+Kaduna,+Nigeria&output=embed"
+          class="h-full w-full border-0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Preselect the subject from links such as /contact?subject=Partnership
+  const subject = new URLSearchParams(location.search).get("subject");
+  const select = document.querySelector<HTMLSelectElement>("#subject");
+  if (subject && select && [...select.options].some((o) => o.value === subject)) select.value = subject;
+</script>

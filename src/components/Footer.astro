@@ -1,0 +1,105 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import SocialLinks from "./SocialLinks.astro";
+import NewsletterForm from "./NewsletterForm.astro";
+import logo from "@/assets/images/logo/yapd4africa-solid.png";
+import africtivistes from "@/assets/images/logo/africtivistes-white.svg";
+import { navigation } from "@/data/content";
+import type { SiteSettings } from "@/lib/types";
+
+interface Props {
+  settings: SiteSettings;
+}
+
+const { settings } = Astro.props;
+const phoneDisplay = settings.phone.replace(/^\+(\d{3})(\d{3})(\d{3})(\d+)$/, "+$1 $2 $3 $4");
+---
+
+<footer class="bg-brand-deep text-white">
+  <div class="border-b border-white/15">
+    <div class="container-site flex flex-col gap-6 py-10 lg:flex-row lg:items-center lg:justify-between">
+      <div>
+        <h2 class="mb-2 text-2xl text-white">Stay informed</h2>
+        <p class="text-gray-200">News from the field, new reports and ways to get involved. No spam.</p>
+      </div>
+      <div class="w-full lg:max-w-md">
+        <NewsletterForm />
+      </div>
+    </div>
+  </div>
+  <div class="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <a href="/" class="mb-4 flex items-center gap-3">
+        <Image src={logo} alt="" height={48} widths={[64, 128]} sizes="64px" class="h-12 w-auto rounded bg-white p-1" />
+        <span class="font-display text-xl font-bold">YAPD4Africa</span>
+      </a>
+      <p class="text-sm leading-relaxed text-gray-200">
+        Advancing social development and empowering African grassroots communities through youth-led empowerment,
+        inclusive governance and advocacy.
+      </p>
+    </div>
+
+    <nav aria-label="Footer">
+      <h2 class="mb-4 text-lg text-white">Quick Navigation</h2>
+      <ul class="space-y-1">
+        <li><a href="/" class="inline-block py-1 text-gray-200 hover:text-white">Home</a></li>
+        {
+          navigation.map((item) => (
+            <li>
+              <a href={item.href} class="inline-block py-1 text-gray-200 hover:text-white">
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="mb-4 text-lg text-white">Contact Us</h2>
+      <ul class="space-y-3 text-gray-200">
+        <li class="flex items-start gap-2">
+          <Icon name="lucide:mail" class="mt-0.5 h-5 w-5 shrink-0" />
+          <a href={`mailto:${settings.email}`} class="inline-block py-0.5 hover:text-white">{settings.email}</a>
+        </li>
+        <li class="flex items-start gap-2">
+          <Icon name="lucide:phone" class="mt-0.5 h-5 w-5 shrink-0" />
+          <a href={`tel:${settings.phone}`} class="inline-block py-0.5 hover:text-white">{phoneDisplay}</a>
+        </li>
+        <li class="flex items-start gap-2">
+          <Icon name="lucide:map-pin" class="mt-0.5 h-5 w-5 shrink-0" />
+          <span>{settings.address}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="mb-4 text-lg text-white">Follow Us</h2>
+      <SocialLinks socials={settings.socials} linkClass="bg-white/10 hover:bg-white/20" />
+      <a
+        href="/support-us"
+        class="mt-6 inline-block rounded-md border border-white px-4 py-2 text-sm font-medium hover:bg-white hover:text-brand-deep"
+      >
+        Support Our Work
+      </a>
+    </div>
+  </div>
+
+  <div class="border-t border-white/20">
+    <div
+      class="container-site flex flex-col items-center justify-between gap-4 py-6 text-sm text-gray-300 md:flex-row"
+    >
+      <p>&copy; {new Date().getFullYear()} YAPD4Africa. All rights reserved.</p>
+      <a
+        href="https://africtivistes.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-3 hover:text-white"
+      >
+        <span>Designed and developed with the technical support of</span>
+        <Image src={africtivistes} alt="AfricTivistes" class="h-8 w-auto" />
+      </a>
+    </div>
+  </div>
+</footer>

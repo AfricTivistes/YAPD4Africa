@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import logo from "@/assets/images/logo/yapd4africa.png";
+import { navigation } from "@/data/content";
+import { cleanPath } from "@/lib/content";
+
+const path = cleanPath(Astro.url);
+const isActive = (href: string) => path === href || path.startsWith(`${href}/`);
+---
+
+<header class="sticky top-0 z-50 border-b border-transparent bg-white/90 backdrop-blur-md transition-[border-color,box-shadow] duration-300 data-[scrolled]:border-gray-200/80 data-[scrolled]:shadow-sm" data-header>
+  <div class="container-site flex items-center justify-between py-2">
+    <a href="/" class="shrink-0" aria-label="YAPD4Africa home">
+      <Image src={logo} alt="YAPD4Africa" height={64} widths={[96, 192]} sizes="96px" class="h-14 w-auto md:h-16" loading="eager" />
+    </a>
+
+    <nav aria-label="Main" class="hidden items-center gap-7 md:flex">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "relative py-1 font-medium transition-colors hover:text-brand-dark",
+              isActive(item.href)
+                ? "text-brand-dark after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-accent"
+                : "text-gray-700",
+            ]}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a href="/support-us" class="btn-accent px-6 py-2.5">
+        <Icon name="lucide:heart" class="h-4 w-4" /> Donate
+      </a>
+    </nav>
+
+    <button
+      type="button"
+      class="group rounded-md p-2 text-brand hover:text-brand-dark md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Open menu"
+      data-menu-toggle
+    >
+      <Icon name="lucide:menu" class="h-7 w-7 group-aria-expanded:hidden" />
+      <Icon name="lucide:x" class="hidden h-7 w-7 group-aria-expanded:block" />
+    </button>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Mobile" class="hidden border-t border-gray-100 bg-white md:hidden">
+    <div class="container-site space-y-1 py-4">
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "block rounded-lg px-3 py-2.5 text-lg font-medium hover:bg-sand",
+              isActive(item.href) ? "bg-sand text-brand-dark" : "text-gray-800",
+            ]}
+          >
+            {item.name}
+          </a>
+        ))
+      }
+      <a href="/support-us" class="btn-accent mt-4 w-full">
+        <Icon name="lucide:heart" class="h-4 w-4" /> Donate
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const onScroll = () => header?.toggleAttribute("data-scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  const button = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.getElementById("mobile-menu");
+  const setOpen = (open: boolean) => {
+    button?.setAttribute("aria-expanded", String(open));
+    button?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu?.classList.toggle("hidden", !open);
+  };
+  button?.addEventListener("click", () => setOpen(button.getAttribute("aria-expanded") !== "true"));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && button?.getAttribute("aria-expanded") === "true") {
+      setOpen(false);
+      button.focus();
+    }
+  });
+</script>
