@@ -17,6 +17,7 @@ require_once __DIR__ . '/inc/content-model.php';
 require_once __DIR__ . '/inc/build-hook.php';
 require_once __DIR__ . '/inc/headless.php';
 require_once __DIR__ . '/inc/admin.php';
+require_once __DIR__ . '/inc/importer.php';
 
 // New post types need fresh rewrite rules, otherwise their URLs return 404.
 add_action(

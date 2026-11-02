@@ -28,7 +28,8 @@ function yapd_build_hook_url(): string {
  */
 function yapd_trigger_build( string $reason = '' ): bool {
 	$hook = yapd_build_hook_url();
-	if ( ! $hook ) {
+	// The content importer requests a single build once it is done.
+	if ( ! $hook || ! empty( $GLOBALS['yapd_importing'] ) ) {
 		return false;
 	}
 	// The block editor saves a post several times in a row: send one request only.

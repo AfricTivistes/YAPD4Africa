@@ -1,0 +1,868 @@
+{
+ "generated": "2026-11-02T11:52:27.903Z",
+ "ref": "521b363a",
+ "projects": [
+  {
+   "slug": "community-action-led-initiative",
+   "title": "Community Action-Led Initiative (CAL)",
+   "excerpt": "Our flagship civic education movement, empowering grassroots communities to understand their rights and hold their representatives accountable, in Nigeria, Cameroon and beyond.",
+   "content": "<p>The Community Action-Led Initiative (CAL) is the driving force behind our work: a grassroots movement that equips underserved communities with the civic literacy they need to understand their rights, responsibilities and duties as citizens, and to hold their representatives accountable.</p>\n<p>CAL started by teaching community groups to track public development budgets with digital platforms such as FollowTheMoney and TrackaNigeria. Those early field experiences shaped our core conviction: public authorities can only be engaged effectively when communities present concrete, evidence-based data.</p>\n<h2>2025 highlights</h2>\n<ul>\n<li>Over 1,500 people, including women, youth and the elderly, empowered across 6 remote areas of Kaduna and Jigawa States, including Igabi, Dutse and Birnin Kudu.</li>\n<li>Community accountability structures established, enabling citizens to safely engage local governments and demand transparency.</li>\n<li>Sustainable community development plans designed with local authorities and stakeholders.</li>\n<li>After a successful launch in Cameroon, regional expansion underway in Ghana and Kenya.</li>\n</ul>\n<h2>International recognition</h2>\n<p>CAL was shortlisted among the Top 15 finalists of the Reimagine Civic Engagement Award by YGC Germany (2024), and selected among the 100 finalists of the Excellence Actions for Global Youth Development in China (2025).</p>",
+   "order": 0,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/cal.jpg",
+    "alt": "CAL project facilitators meeting with community members"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "Since 2019, over 8,000 young citizens empowered across 15 communities with sustainable solutions for youth civic participation.",
+    "tags": "Civic Education, Accountability, Nigeria, Cameroon",
+    "period": "Since 2019",
+    "key_figures": "8,000+ | young citizens empowered since 2019\n1,500+ | people reached in 2025\n2 | countries active, with Ghana and Kenya underway",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "local-accountability-watch",
+   "title": "Local Accountability Watch (LAW Project)",
+   "excerpt": "A citizen-led response to local governance challenges: 20 trained LAW Drivers, a Citizen Toolkit for Accountability and direct engagement with local authorities in Jigawa State.",
+   "content": "<p>The Local Accountability Watch (LAW Project) is a bold, citizen-led response to the governance challenges facing local communities. Recognizing that the heart of democracy lies at the grassroots, we bridge the gap between citizens and local authorities by fostering a culture of transparency and proactive engagement.</p>\n<p>The project equips community members with the <strong>Citizen Toolkit for Accountability</strong>, a practical manual that helps citizens demand better service delivery and hold officials responsible. A bilingual Citizen Engagement and Sensitization toolkit in English and Hausa removed literacy barriers during community sessions.</p>\n<h2>The Local Accountability Fellowship</h2>\n<p>The fellowship received over 400 applications from 23 Nigerian states and one other African country. 20 young leaders, the <strong>LAW Drivers</strong>, were trained in local governance, transparency and accountability, communication for change, social accountability tools and monitoring and evaluation. They then led advocacy in three target communities: Disina, Sasarai and Birnin Kudu.</p>\n<h2>Key components</h2>\n<ul>\n<li><strong>Citizen Toolkit for Accountability:</strong> a practical guide for navigating local governance and demanding transparency.</li>\n<li><strong>LAW Drivers Fellowship:</strong> intensive training for civil society leaders and youth advocates championing accountability at community level.</li>\n<li><strong>Stakeholder engagement:</strong> direct advocacy with local government officials, academic leaders and traditional institutions, including the Special Assistant to the Governor of Jigawa State on Youth Mobilization, the Deputy Vice Chancellor of Federal University Dutse and the Emir of Dutse.</li>\n<li><strong>Community sensitization:</strong> public events, media campaigns and press briefings to educate citizens on their rights and civic duties.</li>\n</ul>\n<p>The project officially wrapped up on 28 November 2025 and will be replicated in other underserved states.</p>",
+   "order": 1,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/law.jpg",
+    "alt": "LAW Drivers of the Local Accountability Fellowship holding their certificates"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "Over 200 citizens directly engaged in local governance, community accountability structures established, and millions reached through media campaigns across Nigeria.",
+    "tags": "Local Governance, Accountability, Fellowship, Jigawa State",
+    "period": "2025",
+    "key_figures": "400+ | fellowship applications from 23 states\n20 | LAW Drivers trained\n200+ | citizens directly engaged\n5M+ | people reached through radio and TV",
+    "supporters": "WYDE Civic Engagement, European Commission, ALDA, European Partnership for Democracy, People in Need, Elbarlament"
+   }
+  },
+  {
+   "slug": "naija-advocate",
+   "title": "NaijaAdvocate Fellowship",
+   "excerpt": "Empowering young Nigerians to champion healthcare equity through accountability and evidence-based advocacy, including the #FixOurPHCs campaign for local clinics.",
+   "content": "<p>The NaijaAdvocate Program empowers young Nigerians to champion healthcare equity through accountability and evidence-based advocacy. It bridges the gap between policymakers and grassroots communities.</p>\n<p>The fellowship was born out of the deteriorating state of Nigeria's Primary Healthcare Centres (PHCs), especially in remote and underserved communities, where facilities are often outdated, poorly equipped and understaffed.</p>\n<h2>#FixOurPHCs</h2>\n<p>A key component is the <strong>#FixOurPHCs</strong> campaign, a grassroots movement that turns data and digital storytelling into pressure for systemic reform.</p>\n<h2>Results</h2>\n<ul>\n<li>Over 400 applications received nationwide; 10 finalists trained in Kano State in healthcare policy tracking and digital advocacy, and 8 fellows graduated.</li>\n<li>Seed funding provided to 3 fellows to launch #FixOurPHCs campaign projects for the restoration of local clinics.</li>\n<li>Over 100 residents reached to understand their rights and demand better healthcare.</li>\n<li>Advocacy carried to the 13th Kaduna State Council on Health, and partnerships with the Centre for Information Technology and Development (CITAD) and PRNigeria to drive digital activism in primary healthcare.</li>\n</ul>\n<p>In 2026, we plan to expand the fellowship across the North-West and North-East geopolitical zones of Nigeria.</p>",
+   "order": 2,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/naija-advocate.jpg",
+    "alt": "NaijaAdvocate fellows holding their certificates"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "A cohort of young leaders now at the forefront of healthcare reform, holding local health providers and institutions accountable.",
+    "tags": "Health, Primary Healthcare, Fellowship, Kano State",
+    "period": "2025",
+    "key_figures": "400+ | applications received\n10 | fellows trained in Kano State\n3 | fellows funded for #FixOurPHCs projects\n100+ | residents reached",
+    "supporters": "Nigeria Youth Futures Fund (NYFF)"
+   }
+  },
+  {
+   "slug": "murya",
+   "title": "Murya",
+   "excerpt": "A civic tech initiative bridging the gap between citizens' needs and government projects with data-driven evidence reports.",
+   "content": "<p>Murya is an innovative civic tech initiative designed to bridge the gaps between citizens' needs and government projects. It provides a platform for citizens to voice their concerns about service delivery and empowers the government with data-driven evidence reports.</p>\n<h2>Gwaraji Ward needs assessment</h2>\n<p>Through Murya, YAPD4Africa completed a self-funded needs assessment across Gwaraji Ward, Igabi LGA, Kaduna State. Despite severe security challenges, our field teams conducted offline surveys in remote areas with limited connectivity, engaging traditional rulers, youth leaders and rural women.</p>\n<p>The findings exposed dilapidated primary schools, broken primary health centres, neglected roads and non-functional water, sanitation and hygiene (WASH) facilities. They also revealed a deep gender imbalance: only 5% of women actively participate in local governance and community development decisions.</p>",
+   "order": 3,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/murya.png",
+    "alt": "Murya civic tech initiative field survey"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "Enabling better alignment of government projects with essential citizen needs.",
+    "tags": "Civic Tech, Service Delivery, Open Government",
+    "period": "Since 2024",
+    "key_figures": "60,000+ | indirect beneficiaries (2024-2025)\n5% | of women take part in local decisions: the gap we work to close",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "kuria",
+   "title": "Kuri'a",
+   "excerpt": "Our election reforms initiative, combining digital and physical engagement to promote electoral accountability, transparency and inclusiveness in Nigeria.",
+   "content": "<p>Kuri'a is a citizen-led initiative that combines digital and physical engagement to promote electoral accountability, transparency and inclusiveness in Nigeria, through mobile and web platforms, community outreach and physical events.</p>\n<h2>Voter Education 101</h2>\n<p>Kuri'a published <strong>Voter Education 101: The Ultimate Youth Survival Guide</strong>, an essential framework for the 2027 elections and everyday civic action, fully aligned with the Electoral Act 2026.</p>\n<h2>Policy advocacy</h2>\n<p>Through Kuri'a, YAPD4Africa commended the National Assembly for withdrawing the compulsory voting bill, arguing that democracy must be anchored on freedom of choice, and urged lawmakers to address the root causes of voter apathy, including insecurity and limited access to polling units.</p>\n<h2>Looking ahead</h2>\n<p>Ahead of the 2027 General Elections, Kuri'a will launch its AI Monitor Version 1.0, designed to institutionalize grassroots voter education, protect electoral integrity and give rural communities a secure, tech-driven channel to monitor democratic processes in real time.</p>",
+   "order": 4,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/kuria.png",
+    "alt": "Kuri'a election observers at a polling unit"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "Empowering citizens to participate actively in the electoral process and demand good governance.",
+    "tags": "Elections, Voter Education, Accountability, Nigeria",
+    "period": "",
+    "key_figures": "",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "rescue-a-girl-initiative",
+   "title": "Rescue A Girl Initiative",
+   "excerpt": "A social enterprise providing eco-friendly reusable sanitary products to hard-to-reach marginalized girls and women.",
+   "content": "<p>Rescue A Girl is a social enterprise empowering hard-to-reach marginalized grassroots girls and women through the provision of eco-friendly reusable sanitary products.</p>",
+   "order": 5,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/rescue-a-girl.jpg",
+    "alt": "Rescue A Girl Initiative session with schoolgirls"
+   },
+   "acf": {
+    "category": "homegrown",
+    "impact": "Protecting the environment while addressing women's health needs.",
+    "tags": "Menstrual Health, Girls and Women, Environment",
+    "period": "",
+    "key_figures": "",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "water-for-local-communities",
+   "title": "Water for Local Communities (WLC Project)",
+   "excerpt": "Reconstruction of a solar-powered borehole in Joga Sabon Gari, restoring daily access to clean water for over 7,000 residents.",
+   "content": "<p>The Water for Local Communities project, sponsored by the Advocacy for Human Value Foundation in Joga Sabon Gari, delivered life-changing results through our Community Action-Led Initiative (CAL) approach.</p>\n<p>By reconstructing the solar-powered borehole, we restored daily access to safe, clean water for over 7,000 residents, including women and school-aged children who previously trekked long distances.</p>\n<h2>Results</h2>\n<ul>\n<li>A documented 60% reduction in water-borne diseases within the community.</li>\n<li>A 15-member Community Development Builders Committee established to maintain the facility.</li>\n<li>A 90% community participation rate, ensuring deep local ownership.</li>\n<li>A noticeable increase in school attendance among girls and enhanced economic productivity for women.</li>\n</ul>\n<p>This intervention is a high-impact, green-energy model that provides a permanent solution to water scarcity while fostering grassroots accountability and resilience.</p>",
+   "order": 6,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/water-for-local-communities.jpg",
+    "alt": "Community members in front of the reconstructed borehole in Joga Sabon Gari"
+   },
+   "acf": {
+    "category": "past",
+    "impact": "Over 7,000 residents with daily access to clean water and a 60% drop in water-borne diseases.",
+    "tags": "WASH, Clean Water, Green Energy, Kaduna State",
+    "period": "2024",
+    "key_figures": "7,000+ | residents with clean water\n60% | fewer water-borne diseases\n90% | community participation\n15 | committee members maintaining the borehole",
+    "supporters": "Advocacy for Human Value Foundation"
+   }
+  },
+  {
+   "slug": "who-is-almajiri",
+   "title": "Who Is Almajiri Project",
+   "excerpt": "Advocacy for the rights of Almajiri and other street children in northern Nigeria, contributing to the creation of a national commission in 2023.",
+   "content": "<p>The Who Is Almajiri Project was among the active projects in northern Nigeria that advocated for the rights of street children over the past five years.</p><p>The project produced a policy recommendation on how to reduce the high school dropout rate through a sustainable reform for both Almajiri and other street children.</p>",
+   "order": 7,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/almajiri.jpg",
+    "alt": "Who Is Almajiri project with street children in northern Nigeria"
+   },
+   "acf": {
+    "category": "past",
+    "impact": "After sustained advocacy at the national level, the bill to establish a national commission for Almajiri and out-of-school children was signed by former President Muhammadu Buhari in 2023.",
+    "tags": "Child Rights, Education, Policy Advocacy, Northern Nigeria",
+    "period": "",
+    "key_figures": "",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "rescue-mission-against-covid-19",
+   "title": "Rescue Mission against COVID-19",
+   "excerpt": "A two-month emergency response in 2020 that directly supported 500 beneficiaries and mobilized over 1,000 young people online.",
+   "content": "<p>This project was a short-term activity running for two months, from March to May 2020. Through the project, YAPD4Africa directly impacted 500 beneficiaries, while our social media channels mobilized over 1,000 young people to raise awareness on preventing COVID-19 and to help raise resources for the project.</p>",
+   "order": 8,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/covid-19-rescue.jpg",
+    "alt": "Volunteers distributing COVID-19 relief materials"
+   },
+   "acf": {
+    "category": "past",
+    "impact": "The project distributed relief materials to the most vulnerable groups, especially orphanages, and provided homemade face masks and sanitizers to supplement scarce and overpriced supplies.",
+    "tags": "Health, Emergency Response, Community Support, COVID-19 Relief",
+    "period": "2020",
+    "key_figures": "500 | direct beneficiaries\n1,000+ | young people mobilized online",
+    "supporters": ""
+   }
+  },
+  {
+   "slug": "we-need-peace",
+   "title": "We Need Peace Project",
+   "excerpt": "A seven-month peace-building campaign engaging community leaders, religious scholars, security agents and political parties ahead of the elections.",
+   "content": "<p>We implemented our <em>We Need Peace</em> project from 8 September 2018 to 31 March 2019. Over seven months, we advocated and engaged with community leaders, religious scholars, security agents and political parties on how they could contribute to promoting peace.</p><p>In the end, the elections were conducted peacefully, freely and fairly.</p>",
+   "order": 9,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/we-need-peace.jpg",
+    "alt": "We Need Peace project engagement session"
+   },
+   "acf": {
+    "category": "past",
+    "impact": "The project contributed to peaceful, free and fair elections through community engagement and advocacy.",
+    "tags": "Peace Building, Community Engagement, Advocacy, Elections",
+    "period": "2018-2019",
+    "key_figures": "",
+    "supporters": ""
+   }
+  }
+ ],
+ "team": [
+  {
+   "slug": "idris-bilyaminu-ndasadu-lau",
+   "title": "Idris Bilyaminu Ndasadu'Lau",
+   "order": 0,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/idris-bilyaminu.jpg",
+    "alt": "Idris Bilyaminu Ndasadu'Lau, Founder & Chief Executive at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Founder & Chief Executive",
+    "group": "staff",
+    "bio": "Leading YAPD4Africa's vision and strategic direction with extensive experience in youth development and community engagement."
+   }
+  },
+  {
+   "slug": "sa-adatu-idris-ndasadu-lau",
+   "title": "Sa'adatu Idris Ndasadu'Lau",
+   "order": 1,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/saadatu-idris.png",
+    "alt": "Sa'adatu Idris Ndasadu'Lau, Head of Programs at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Head of Programs",
+    "group": "staff",
+    "bio": "Overseeing program development and implementation with a focus on sustainable community impact."
+   }
+  },
+  {
+   "slug": "yahya-abubakar",
+   "title": "Yahya Abubakar",
+   "order": 2,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/yahya-abubakar.jpg",
+    "alt": "Yahya Abubakar, Programs Manager (Youth Engagement) at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Programs Manager (Youth Engagement)",
+    "group": "staff",
+    "bio": "Specializing in youth mobilization and leadership development across African communities."
+   }
+  },
+  {
+   "slug": "fatima-muftau",
+   "title": "Fatima Muftau",
+   "order": 3,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/fatima-muftau.png",
+    "alt": "Fatima Muftau, Assistant Monitoring and Evaluation Manager at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Assistant Monitoring and Evaluation Manager",
+    "group": "staff",
+    "bio": "Ensuring program effectiveness and impact through rigorous monitoring and evaluation."
+   }
+  },
+  {
+   "slug": "baqau-hassan-omotayo",
+   "title": "Baqau Hassan Omotayo",
+   "order": 4,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/baqau-hassan.jpg",
+    "alt": "Baqau Hassan Omotayo, Creative Design Manager at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Creative Design Manager",
+    "group": "staff",
+    "bio": "Leading our visual communication and creative strategy to amplify our impact."
+   }
+  },
+  {
+   "slug": "ibrahim-mohammed-bakodo",
+   "title": "Ibrahim Mohammed Bakodo",
+   "order": 5,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/ibrahim-mohammed.jpg",
+    "alt": "Ibrahim Mohammed Bakodo, Community Engagement Manager at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Community Engagement Manager",
+    "group": "staff",
+    "bio": "Building bridges, fostering connections, and empowering communities through inclusive engagement strategies."
+   }
+  },
+  {
+   "slug": "fatima-mohammed-habib-trustee",
+   "title": "Fatima Mohammed Habib",
+   "order": 6,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/fatima-mohammed-habib.jpg",
+    "alt": "Fatima Mohammed Habib, Board Chair at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Chair",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "idris-bilyaminu-ndasadu-lau-trustee",
+   "title": "Idris Bilyaminu Ndasadu'Lau",
+   "order": 7,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/staff/idris-bilyaminu.jpg",
+    "alt": "Idris Bilyaminu Ndasadu'Lau, Board Secretary at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Secretary",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "tagwai-zigwai-trustee",
+   "title": "Tagwai Zigwai",
+   "order": 8,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/tagwai-zigwai.jpg",
+    "alt": "Tagwai Zigwai, Board Secretary II at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Secretary II",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "aisha-dabo-trustee",
+   "title": "Aisha Dabo",
+   "order": 9,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/aisha-dabo.jpg",
+    "alt": "Aisha Dabo, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "abbas-inuwa-trustee",
+   "title": "Abbas Inuwa",
+   "order": 10,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/abbas-inuwa.jpg",
+    "alt": "Abbas Inuwa, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "zainab-suleiman-ajuma-trustee",
+   "title": "Zainab Suleiman Ajuma",
+   "order": 11,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/zainab-suleiman-ajuma.jpg",
+    "alt": "Zainab Suleiman Ajuma, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "ayomide-ladipo-yetunde-trustee",
+   "title": "Ayomide Ladipo Yetunde",
+   "order": 12,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/ayomide-ladipo-yetunde.jpg",
+    "alt": "Ayomide Ladipo Yetunde, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "mbah-aaron-promise-trustee",
+   "title": "Mbah Aaron Promise",
+   "order": 13,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/mbah-aaron-promise.jpg",
+    "alt": "Mbah Aaron Promise, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  },
+  {
+   "slug": "valentine-okafor-trustee",
+   "title": "Valentine Okafor",
+   "order": 14,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/trustees/valentine-okafor.jpg",
+    "alt": "Valentine Okafor, Board Member at YAPD4Africa"
+   },
+   "acf": {
+    "role": "Board Member",
+    "group": "trustee",
+    "bio": ""
+   }
+  }
+ ],
+ "reports": [
+  {
+   "slug": "2025-annual-report-strengthening-local-governance-driving-civic-action-and-foste",
+   "title": "2025 Annual Report: Strengthening Local Governance, Driving Civic Action and Fostering Continental Solidarity",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/annual-report-2025.jpg",
+    "alt": "Cover of the YAPD4Africa 2025 Annual Report"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-annual-report-2025.pdf"
+   },
+   "acf": {
+    "report_type": "annual",
+    "report_date": "20251231",
+    "description": "Our year in numbers and stories: the LAW Project, the NaijaAdvocate Fellowship, the Murya needs assessment, international recognition and our roadmap for 2026."
+   },
+   "project": null
+  },
+  {
+   "slug": "closing-the-gap-4-year-strategic-plan-2024-2028",
+   "title": "Closing the Gap: 4-Year Strategic Plan 2024-2028",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/strategy-plan-2024-2028.jpg",
+    "alt": "Cover of the YAPD4Africa 2024-2028 Strategic Plan"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-strategy-plan-2024-2028.pdf"
+   },
+   "acf": {
+    "report_type": "annual",
+    "report_date": "20240101",
+    "description": "How we will harness meaningful partnerships to drive transformative social change for inclusive development in marginalized communities across Africa."
+   },
+   "project": null
+  },
+  {
+   "slug": "5-years-social-impact-report-building-strong-people-and-sustainable-communities-",
+   "title": "5 Years Social Impact Report: Building Strong People and Sustainable Communities for All",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/5-years-report.jpg",
+    "alt": "Cover of the YAPD4Africa 5 Years Social Impact Report"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-5-years-social-impact-report.pdf"
+   },
+   "acf": {
+    "report_type": "annual",
+    "report_date": "20221231",
+    "description": "A look back at five years of YAPD4Africa programs, partnerships and impact across grassroots communities."
+   },
+   "project": null
+  },
+  {
+   "slug": "local-accountability-watch-report",
+   "title": "Local Accountability Watch Report",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/local-accountability-watch-report-2025.jpg",
+    "alt": "Cover of the Local Accountability Watch Report, November 2025"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-local-accountability-watch-report-2025.pdf"
+   },
+   "acf": {
+    "report_type": "project",
+    "report_date": "20251128",
+    "description": "The full story of the LAW Project in Jigawa State: the Local Accountability Fellowship, the LAW Drivers' community actions and stakeholder engagement."
+   },
+   "project": "local-accountability-watch"
+  },
+  {
+   "slug": "gwaraji-ward-needs-assessment-report-education-health-wash-facilities-and-road",
+   "title": "Gwaraji Ward Needs Assessment Report: Education, Health, WASH Facilities and Road",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/gwaraji-ward.jpg",
+    "alt": "Cover of the Gwaraji Ward Needs Assessment Report"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/gwaraji-ward-needs-assessment-report.pdf"
+   },
+   "acf": {
+    "report_type": "project",
+    "report_date": "20240131",
+    "description": "A Murya needs assessment documenting the state of education, health, water, sanitation and road infrastructure in Gwaraji ward, Kaduna State."
+   },
+   "project": "murya"
+  },
+  {
+   "slug": "first-community-intervention-report-on-joga-village",
+   "title": "First Community Intervention Report on Joga Village",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/joga-village.jpg",
+    "alt": "First page of the Joga Village community intervention report"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/joga-village-community-intervention-report.pdf"
+   },
+   "acf": {
+    "report_type": "project",
+    "report_date": "20231202",
+    "description": "Findings from a three-day CAL intervention in Joga, Gwaraji ward (Igabi LGA, Kaduna State), covering education, health and water challenges."
+   },
+   "project": "community-action-led-initiative"
+  },
+  {
+   "slug": "citizen-toolkit-for-accountability",
+   "title": "Citizen Toolkit for Accountability",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/citizen-toolkit-for-accountability.jpg",
+    "alt": "Cover of the Citizen Toolkit for Accountability"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-citizen-toolkit-for-accountability.pdf"
+   },
+   "acf": {
+    "report_type": "research",
+    "report_date": "20250601",
+    "description": "A practical guide for citizens to navigate local governance, demand better service delivery and hold officials accountable."
+   },
+   "project": "local-accountability-watch"
+  },
+  {
+   "slug": "voter-education-101-the-ultimate-youth-survival-guide",
+   "title": "Voter Education 101: The Ultimate Youth Survival Guide",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/reports/voter-education-101-kuria.jpg",
+    "alt": "Cover of Voter Education 101 by Kuri'a Nigeria"
+   },
+   "file": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/public/reports/yapd4africa-voter-education-101-kuria.pdf"
+   },
+   "acf": {
+    "report_type": "research",
+    "report_date": "20260101",
+    "description": "An essential framework for the 2027 elections and everyday civic action, fully aligned with the Electoral Act 2026."
+   },
+   "project": "kuria"
+  }
+ ],
+ "partners": [
+  {
+   "slug": "european-union",
+   "title": "European Union",
+   "order": 0,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/european-union.png",
+    "alt": "European Union logo"
+   },
+   "acf": {
+    "website": "https://european-union.europa.eu"
+   }
+  },
+  {
+   "slug": "european-partnership-for-democracy",
+   "title": "European Partnership for Democracy",
+   "order": 1,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/european-partnership-for-democracy.png",
+    "alt": "European Partnership for Democracy logo"
+   },
+   "acf": {
+    "website": "https://epd.eu"
+   }
+  },
+  {
+   "slug": "alda-european-association-for-local-democracy",
+   "title": "ALDA - European Association for Local Democracy",
+   "order": 2,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/alda.png",
+    "alt": "ALDA - European Association for Local Democracy logo"
+   },
+   "acf": {
+    "website": "https://www.alda-europe.eu"
+   }
+  },
+  {
+   "slug": "wyde-civic-engagement",
+   "title": "WYDE Civic Engagement",
+   "order": 3,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/wyde-civic-engagement.png",
+    "alt": "WYDE Civic Engagement logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "unfpa",
+   "title": "UNFPA",
+   "order": 4,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/unfpa.png",
+    "alt": "UNFPA logo"
+   },
+   "acf": {
+    "website": "https://www.unfpa.org"
+   }
+  },
+  {
+   "slug": "unodc",
+   "title": "UNODC",
+   "order": 5,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/unodc.jpg",
+    "alt": "UNODC logo"
+   },
+   "acf": {
+    "website": "https://www.unodc.org"
+   }
+  },
+  {
+   "slug": "society-for-family-health",
+   "title": "Society for Family Health",
+   "order": 6,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/society-for-family-health.png",
+    "alt": "Society for Family Health logo"
+   },
+   "acf": {
+    "website": "https://sfhnigeria.org"
+   }
+  },
+  {
+   "slug": "a360",
+   "title": "A360",
+   "order": 7,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/a360.png",
+    "alt": "A360 logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "shareyourself",
+   "title": "ShareYourself",
+   "order": 8,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/shareyourself.png",
+    "alt": "ShareYourself logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "tostan",
+   "title": "Tostan",
+   "order": 9,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/tostan.jpg",
+    "alt": "Tostan logo"
+   },
+   "acf": {
+    "website": "https://tostan.org"
+   }
+  },
+  {
+   "slug": "connected-development-code",
+   "title": "Connected Development (CODE)",
+   "order": 10,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/code.png",
+    "alt": "Connected Development (CODE) logo"
+   },
+   "acf": {
+    "website": "https://connecteddevelopment.org"
+   }
+  },
+  {
+   "slug": "africtivistes",
+   "title": "AfricTivistes",
+   "order": 11,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/africtivistes.png",
+    "alt": "AfricTivistes logo"
+   },
+   "acf": {
+    "website": "https://africtivistes.com"
+   }
+  },
+  {
+   "slug": "organizacion-para-chicas",
+   "title": "Organización Para Chicas",
+   "order": 12,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/organizacion-para-chicas.jpg",
+    "alt": "Organización Para Chicas logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "aspilos-foundation",
+   "title": "Aspilos Foundation",
+   "order": 13,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/aspilos-foundation.jpg",
+    "alt": "Aspilos Foundation logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "advocacy-for-human-value-foundation",
+   "title": "Advocacy for Human Value Foundation",
+   "order": 14,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/advocacy-for-human-value-foundation.jpg",
+    "alt": "Advocacy for Human Value Foundation logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "yorghas-foundation",
+   "title": "Yorghas Foundation",
+   "order": 15,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/yorghas-foundation.jpg",
+    "alt": "Yorghas Foundation logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "non-stop-charity",
+   "title": "Non Stop Charity",
+   "order": 16,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/non-stop-charity.jpg",
+    "alt": "Non Stop Charity logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "nigeria-youth-futures-fund",
+   "title": "Nigeria Youth Futures Fund",
+   "order": 17,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/nigeria-youth-futures-fund.png",
+    "alt": "Nigeria Youth Futures Fund logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "digital-democracy-initiative",
+   "title": "Digital Democracy Initiative",
+   "order": 18,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/digital-democracy-initiative.png",
+    "alt": "Digital Democracy Initiative logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "international-observatory-on-participatory-democracy-oidp",
+   "title": "International Observatory on Participatory Democracy (OIDP)",
+   "order": 19,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/oidp.jpg",
+    "alt": "International Observatory on Participatory Democracy (OIDP) logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "civicrise",
+   "title": "CivicRise",
+   "order": 20,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/civicrise.png",
+    "alt": "CivicRise logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  },
+  {
+   "slug": "wits-enterprise",
+   "title": "Wits Enterprise",
+   "order": 21,
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/partners/wits-enterprise.jpg",
+    "alt": "Wits Enterprise logo"
+   },
+   "acf": {
+    "website": ""
+   }
+  }
+ ],
+ "posts": [
+  {
+   "slug": "local-accountability-watch-project-closes",
+   "title": "LAW Project wraps up: 20 LAW Drivers and a Citizen Toolkit for Accountability",
+   "excerpt": "The Local Accountability Watch project officially closed on 28 November 2025 in Jigawa State, after training 20 LAW Drivers and engaging over 200 citizens in local governance.",
+   "content": "<p>The Local Accountability Watch (LAW Project) officially wrapped up on 28 November 2025, alongside our international partners WYDE Civic Engagement, the European Commission, ALDA – European Association for Local Democracy and others.</p>\n<p>Through the Local Accountability Fellowship, which received over 400 applications from 23 Nigerian states, 20 young leaders were trained as <strong>LAW Drivers</strong>. They led advocacy in Disina, Sasarai and Birnin Kudu, directly engaging over 200 citizens, including women, low-income groups and youth, with a bilingual English and Hausa sensitization toolkit.</p>\n<p>The project also launched the <strong>Citizen Toolkit for Accountability</strong>, engaged high-level stakeholders including the Emir of Dutse and Federal University Dutse, and reached millions of Nigerians through radio, television and social media.</p>\n<p>We now look forward to replicating LAW in Nigeria's most underserved states.</p>\n<p><a href=\"/what-we-do/local-accountability-watch\">Discover the LAW Project</a> · <a href=\"/reports\">Download the LAW report and the Citizen Toolkit</a></p>",
+   "date": "2025-11-28 09:00:00",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/projects/law.jpg",
+    "alt": "LAW Drivers of the Local Accountability Fellowship holding their certificates"
+   },
+   "acf": {
+    "external_url": ""
+   }
+  },
+  {
+   "slug": "wyde-civic-engagement-project-selection",
+   "title": "YAPD4Africa selected among 10 organizations in the WYDE Civic Engagement Project",
+   "excerpt": "YAPD4Africa has been selected as one of the 10 organizations to participate in the WYDE Civic Engagement Project, recognizing our commitment to youth empowerment and community development.",
+   "content": "",
+   "date": "2024-05-01 09:00:00",
+   "image": {
+    "url": "https://raw.githubusercontent.com/AfricTivistes/YAPD4Africa/521b363a/src/assets/images/news/wyde-selection.png",
+    "alt": "WYDE Civic Engagement Project announcement"
+   },
+   "acf": {
+    "external_url": "https://www.alda-europe.eu/meet-the-10-selected-organisations-from-the-3rd-call-for-proposals-of-the-wyde-civic-engagement-project/"
+   }
+  }
+ ],
+ "settings": {
+  "email": "yapd2020@gmail.com",
+  "phone": "+2347047335782",
+  "address": "2nd Floor B6, Wazobia Plaza, Railway Line, Hayin Banki, Kaduna State, Nigeria",
+  "donate_url": "",
+  "linkedin": "https://www.linkedin.com/company/youth-awareness-for-peace-and-development/",
+  "x": "https://x.com/yapd4africa",
+  "instagram": "https://www.instagram.com/yapd_4africa/",
+  "facebook": "https://www.facebook.com/YAPD4Africa",
+  "youtube": "https://www.youtube.com/@yapd4africa",
+  "impact_0_value": "80,000+",
+  "impact_0_label": "Lives Touched",
+  "impact_0_description": "Lives touched by our youth-led programs since 2017",
+  "impact_1_value": "200+",
+  "impact_1_label": "Communities Reached",
+  "impact_1_description": "African communities reached, including schools and IDP camps",
+  "impact_2_value": "8,000+",
+  "impact_2_label": "Young Citizens Empowered",
+  "impact_2_description": "Young citizens empowered through the CAL Project since 2019",
+  "impact_3_value": "5M+",
+  "impact_3_label": "Media Reach",
+  "impact_3_description": "People reached through radio and television programs in 2025",
+  "impact_4_value": "8",
+  "impact_4_label": "Years of Impact",
+  "impact_4_description": "Years of grassroots civic action since our founding in 2017"
+ }
+}

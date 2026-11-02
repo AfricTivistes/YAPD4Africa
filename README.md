@@ -58,6 +58,16 @@ Le CMS est hébergé chez Infomaniak. Il utilise le thème **YAPD4Africa Headles
 
 Pour mettre à jour le thème, téléverser le nouveau zip ; WordPress propose de remplacer la version installée.
 
+### Import du contenu existant
+
+*Outils → YAPD4Africa import* copie dans WordPress tout le contenu affiché aujourd'hui par le site : projets, équipe, partenaires, rapports avec leurs PDF, actualités et réglages. Les images et les PDF sont téléchargés depuis GitHub.
+
+- L'import se fait par lots : il faut garder la page ouverte quelques minutes.
+- Il est sans risque à relancer : une entrée dont le slug existe déjà est ignorée, les médias déjà importés sont réutilisés, et les réglages déjà saisis ne sont pas écrasés.
+- Il ne déclenche qu'un seul build Netlify, à la fin.
+
+Le contenu importé vient de `wordpress/yapd4africa-headless/seed/seed.json`, généré à partir de `src/data/` par `npm run wp:seed -- <commit>`. Le commit doit être déjà poussé sur GitHub et contenir les images.
+
 ### Règles de bascule entre données locales et WordPress
 
 - **Actualités** : articles WordPress + articles locaux pas encore recréés dans WordPress. À slug identique, c'est la version WordPress qui s'affiche.

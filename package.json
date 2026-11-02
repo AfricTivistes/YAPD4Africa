@@ -11,7 +11,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "theme:zip": "cd wordpress && rm -f yapd4africa-headless.zip && zip -rq yapd4africa-headless.zip yapd4africa-headless -x '*.DS_Store'"
+    "theme:zip": "cd wordpress && rm -f yapd4africa-headless.zip && zip -rq yapd4africa-headless.zip yapd4africa-headless -x '*.DS_Store'",
+    "wp:seed": "node scripts/wp-seed/export.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
