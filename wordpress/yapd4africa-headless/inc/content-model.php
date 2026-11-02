@@ -285,7 +285,7 @@ add_action(
 					}
 					$file_id = get_field( 'file', $post['id'], false );
 					$path    = $file_id ? get_attached_file( (int) $file_id ) : false;
-					return $path && file_exists( $path ) ? size_format( filesize( $path ), 1 ) : null;
+					return $path && file_exists( $path ) ? yapd_format_bytes( (int) filesize( $path ) ) : null;
 				},
 				'schema'       => array( 'type' => array( 'string', 'null' ) ),
 			)
@@ -302,6 +302,21 @@ add_action(
 		);
 	}
 );
+
+/**
+ * File size for the English website ("4.8 MB", "196 KB"), whatever the
+ * language of WordPress (size_format() would give "4,8 Mo" in French).
+ */
+function yapd_format_bytes( int $bytes ): string {
+	// Switch to MB from 1,000 KB, so that "1,000 KB" reads "1.0 MB".
+	if ( $bytes >= 1000 * KB_IN_BYTES ) {
+		return number_format( $bytes / MB_IN_BYTES, 1, '.', ',' ) . ' MB';
+	}
+	if ( $bytes >= KB_IN_BYTES ) {
+		return number_format( $bytes / KB_IN_BYTES, 0, '.', ',' ) . ' KB';
+	}
+	return $bytes . ' B';
+}
 
 function yapd_get_settings(): array {
 	$settings = get_option( YAPD_OPTION, array() );
